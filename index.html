@@ -1,0 +1,1341 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MCQ Practice Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4F6FA; --sheet:#FFFFFF; --ink:#14213D; --ink-2:#4A5675; --line:#D5DAE6;
+  --blue:#1D3FBF; --blue-soft:#E4EAFB; --on-blue:#FFFFFF;
+  --ok:#0E7A4D; --ok-soft:#DDF3E8; --bad:#BE2F27; --bad-soft:#FBE3E0;
+  --warn:#8A5A00; --warn-soft:#FFF0CC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1424; --sheet:#161E33; --ink:#E7EBF7; --ink-2:#9AA6C6; --line:#2B3656;
+    --blue:#7C9BFF; --blue-soft:#1D2A55; --on-blue:#0E1424;
+    --ok:#4FD09A; --ok-soft:#12372A; --bad:#FF8A80; --bad-soft:#40201F;
+    --warn:#FFC96B; --warn-soft:#3A2D0E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1424; --sheet:#161E33; --ink:#E7EBF7; --ink-2:#9AA6C6; --line:#2B3656;
+  --blue:#7C9BFF; --blue-soft:#1D2A55; --on-blue:#0E1424;
+  --ok:#4FD09A; --ok-soft:#12372A; --bad:#FF8A80; --bad-soft:#40201F;
+  --warn:#FFC96B; --warn-soft:#3A2D0E;
+}
+html{background:var(--paper);scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;letter-spacing:-.01em;margin:0;line-height:1.15}
+h1{font-size:30px}h2{font-size:21px}h3{font-size:17px}
+p{margin:0 0 10px}
+.wrap{max-width:720px;margin:0 auto;padding:18px 16px 40px}
+.wrap.q{padding-bottom:110px}
+.muted{color:var(--ink-2)}
+.small{font-size:14px}
+.msg{min-height:22px;font-size:14px;color:var(--ink-2);margin:8px 0 0}
+.msg.err{color:var(--bad)}
+
+/* brand + OMR bubbles */
+.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.omr{display:flex;gap:6px}
+.omr i{width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-2);display:block}
+.omr i.f{background:var(--blue);border-color:var(--blue)}
+
+/* sections */
+.sheet{background:var(--sheet);border:1px solid var(--line);border-left:4px solid var(--blue);padding:16px;margin:18px 0}
+.sec{border-top:1px dashed var(--line);margin-top:22px;padding-top:18px}
+label.f{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+input[type=text],input[type=number],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px}
+textarea{resize:vertical;min-height:130px;font-size:15px}
+input[type=file]{width:100%;font:inherit;color:var(--ink);padding:8px 0}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--blue);margin:0}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.btn{font:inherit;font-weight:600;padding:11px 16px;border-radius:10px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;min-height:46px}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.btn.ghost{border-color:var(--line)}
+.btn.danger{border-color:var(--bad);color:var(--bad)}
+.btn.sm{min-height:38px;padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row.sp{justify-content:space-between}
+.grow{flex:1 1 0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+details{margin-top:12px}
+summary{cursor:pointer;font-weight:600;font-size:14px;padding:6px 0}
+pre{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px;overflow-x:auto;font-size:13px;line-height:1.45;margin:8px 0}
+
+/* list rows */
+.item{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item .t{font-weight:600;overflow-wrap:anywhere}
+.subjrow{display:flex;gap:10px;align-items:center;padding:8px 0}
+.subjrow span.n{margin-left:auto;color:var(--ink-2);font-size:14px}
+
+/* quiz */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .in{max-width:720px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.tm{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+.tm.low{color:var(--bad)}
+.top .tq{padding-top:0;padding-bottom:8px}
+.tm.q{font-size:16px}
+.prog{height:3px;background:var(--line)}
+.prog b{display:block;height:100%;background:var(--blue)}
+.qmeta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:16px 0 8px;font-size:14px;color:var(--ink-2)}
+.qtext{white-space:pre-wrap;font-size:17px;line-height:1.6;margin:0 0 16px;overflow-wrap:anywhere}
+.qimg{max-width:100%;height:auto;border:1px solid var(--line);margin:0 0 14px;background:#fff}
+.chip{display:inline-block;padding:1px 9px;border-radius:999px;font-size:13px;font-weight:600;border:1.5px solid var(--line);color:var(--ink-2)}
+.chip.fig{border-color:var(--warn);color:var(--warn);background:var(--warn-soft)}
+.chip.ok{border-color:var(--ok);color:var(--ok);background:var(--ok-soft)}
+.chip.bad{border-color:var(--bad);color:var(--bad);background:var(--bad-soft)}
+.chip.mk{border-color:var(--warn);color:var(--warn);background:var(--warn-soft)}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;font:inherit;color:inherit;background:var(--sheet);border:1.5px solid var(--line);border-radius:12px;padding:12px;margin:0 0 10px;cursor:pointer;min-height:50px}
+.opt:disabled{color:inherit;cursor:default}
+.opt .otext{white-space:pre-wrap;overflow-wrap:anywhere;padding-top:2px}
+.bub{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--ink-2);display:grid;place-items:center;font-size:14px;font-weight:600;color:var(--ink-2)}
+.opt.sel{border-color:var(--blue);background:var(--blue-soft)}
+.opt.sel .bub{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.opt.ok .bub{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.opt.bad .bub{background:var(--bad);border-color:var(--bad);color:#fff}
+.note{font-size:14px;color:var(--ink-2);margin:4px 0 0}
+.exp{background:var(--blue-soft);border-left:4px solid var(--blue);border-radius:8px;padding:10px 12px;margin:12px 0 0;font-size:15px}
+.exp b{display:block;margin-bottom:4px}
+.exp div{white-space:pre-wrap;overflow-wrap:anywhere}
+.bar-b{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--paper);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.bar-b .in{max-width:720px;margin:0 auto;display:flex;gap:10px}
+.bar-b .btn{flex:1}
+
+/* modal grid */
+.modal{position:fixed;inset:0;z-index:20;background:rgba(5,10,25,.55);display:flex;align-items:flex-end;justify-content:center}
+.modal .box{background:var(--sheet);width:100%;max-width:720px;max-height:86%;overflow:auto;border-radius:16px 16px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:8px;margin:12px 0}
+.pb{font:inherit;font-weight:600;min-height:44px;border-radius:50%;aspect-ratio:1;border:2px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;position:relative}
+.pb.seen{border-color:var(--ink-2)}
+.pb.ans{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.pb.cur{outline:3px solid var(--ink);outline-offset:2px}
+.pb.mk::after{content:"";position:absolute;top:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:var(--warn);border:2px solid var(--sheet)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--ink-2)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:2px solid var(--ink-2)}
+.legend .a::before{background:var(--blue);border-color:var(--blue)}
+.legend .m::before{background:var(--warn);border-color:var(--warn)}
+
+/* result */
+.score{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:64px;line-height:1;margin:6px 0 2px}
+.score small{font-size:24px;color:var(--ink-2);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats div{padding:12px 4px;text-align:center;border-left:1px solid var(--line)}
+.stats div:first-child{border-left:0}
+.stats b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:24px}
+.stats span{font-size:13px;color:var(--ink-2)}
+.bar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line);flex:1}
+.bar i{display:block;height:100%}
+.bar .c{background:var(--ok)}.bar .w{background:var(--bad)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tab{font:inherit;font-weight:600;font-size:14px;padding:6px 14px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;min-height:38px}
+.tab.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.rv{border-top:1px dashed var(--line);padding:16px 0}
+.item{flex-wrap:wrap}
+.trend{display:flex;align-items:flex-end;gap:6px;height:120px;margin:12px 0 4px}
+.trend .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;text-align:center;font-size:11px;color:var(--ink-2);min-width:0}
+.trend .b{background:var(--blue);border-radius:3px 3px 0 0;margin-bottom:3px}
+.banner{border:1.5px solid var(--warn);background:var(--warn-soft);color:var(--warn);padding:10px 12px;border-radius:8px;font-size:14px;margin:12px 0}
+.qimg{border-radius:12px;border:1px solid var(--line);box-shadow:0 1px 2px rgba(20,33,61,.10),0 8px 24px rgba(20,33,61,.07)}
+.optgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 10px}
+.optgrid .opt{margin:0;align-items:center}
+.opt{border-radius:14px;box-shadow:0 1px 0 var(--line)}
+.opt:hover:not(:disabled):not(.ok):not(.bad){border-color:var(--blue);background:var(--blue-soft)}
+.bub{width:34px;height:34px;font-size:15px}
+.sheet{border-radius:0 12px 12px 0}
+.btn{border-radius:12px}
+.btn.primary{box-shadow:0 2px 0 rgba(0,0,0,.2)}
+.top{box-shadow:0 2px 10px rgba(20,33,61,.06)}
+.chip{padding:2px 11px}
+@media (max-width:420px){.cols{grid-template-columns:1fr}.score{font-size:54px}h1{font-size:26px}}
+@media (prefers-reduced-motion:no-preference){.pb,.opt,.btn{transition:background-color .12s,border-color .12s}}
+
+body{background:radial-gradient(900px 320px at 50% -80px,var(--blue-soft),transparent 70%),var(--paper);background-attachment:fixed}
+.wrap{max-width:780px}
+.top{background:color-mix(in srgb,var(--paper) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.top .in{max-width:780px}.bar-b .in{max-width:780px}
+.prog{height:5px}.prog b{background:linear-gradient(90deg,var(--blue),#6F8FFF);border-radius:0 4px 4px 0;transition:width .3s}
+.qmeta .chip:first-child{background:var(--blue-soft);border-color:transparent;color:var(--blue)}
+.qcard{background:var(--sheet);border:1px solid var(--line);border-radius:18px;padding:20px;margin:0 0 18px;box-shadow:0 1px 2px rgba(20,33,61,.08),0 12px 30px rgba(20,33,61,.08)}
+.qcard.img{background:#fff;padding:12px}
+.qcard .qimg{display:block;width:auto;max-width:100%;height:auto;margin:0 auto;border:0;box-shadow:none;border-radius:6px}
+.qcard .qimg+.qtext{margin-top:12px}
+.qtext{font-size:20px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.opt{border-radius:16px;padding:14px 16px;min-height:58px;gap:14px;box-shadow:0 1px 2px rgba(20,33,61,.06)}
+.opt .otext{font-size:18px;line-height:1.5;padding-top:4px}
+.optgrid .opt .otext{font-weight:600;padding-top:0}
+.bub{width:38px;height:38px;font-size:17px;border-color:var(--ink-2)}
+.opt.sel{box-shadow:0 0 0 4px var(--blue-soft)}
+.opt.ok{box-shadow:0 0 0 4px var(--ok-soft)}.opt.bad{box-shadow:0 0 0 4px var(--bad-soft)}
+.btn.primary{background:linear-gradient(180deg,var(--blue),color-mix(in srgb,var(--blue) 82%,#000))}
+.bar-b{-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:color-mix(in srgb,var(--paper) 92%,transparent)}
+@media (max-width:520px){.optgrid{grid-template-columns:1fr 1fr}.qtext{font-size:18px}}
+.qcard .qimg{width:100%}
+.exp.img{background:#fff;border-left-color:var(--ok);color:#14213D}.exp.img b{color:#14213D}.exp .qimg{width:100%;height:auto;border:0;box-shadow:none;margin:0;border-radius:6px}
+
+/* ---- Doctor theme ---- */
+:root{--paper:#EEF8F7;--sheet:#FFFFFF;--ink:#0B2E33;--ink-2:#4C6E72;--line:#CBE3E1;--blue:#0B7F86;--blue-soft:#D9F1EF;--on-blue:#FFFFFF;--ok:#15803D;--ok-soft:#DCF5E5;--bad:#C2352B;--bad-soft:#FCE4E1}
+@media (prefers-color-scheme: dark){:root{--paper:#07191C;--sheet:#0E2A2E;--ink:#E4F5F3;--ink-2:#9BBFC0;--line:#1E4247;--blue:#3CC4BC;--blue-soft:#12383B;--on-blue:#03211F;--ok:#4CC38A;--ok-soft:#10392A;--bad:#F27A70;--bad-soft:#401B19}}
+body{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M26 22h4v4h4v4h-4v4h-4v-4h-4v-4h4z' fill='%230B7F86' fill-opacity='.07'/%3E%3C/svg%3E"),radial-gradient(900px 320px at 50% -80px,var(--blue-soft),transparent 70%),var(--paper);background-attachment:scroll,fixed,fixed}
+#ahead{position:relative;overflow:hidden;background:linear-gradient(100deg,#075E66,#0B8E8C 55%,#12B3A6);color:#fff;border-bottom:3px solid #7EE0D6;box-shadow:0 4px 18px rgba(7,94,102,.28)}
+#ahead .mq{overflow:hidden;white-space:nowrap;padding:8px 0 2px}
+#ahead .track{display:inline-flex;animation:mq 28s linear infinite;will-change:transform}
+#ahead .grp{display:inline-flex}
+#ahead .mi{display:inline-flex;align-items:center;gap:14px;padding:0 26px}
+#ahead .cr{width:18px;height:18px;fill:#fff;opacity:.9;flex:none}
+#ahead b{font-family:'Cinzel Decorative','Cinzel',Georgia,'Times New Roman',serif;font-weight:900;font-size:30px;line-height:1.2;letter-spacing:.22em;background:linear-gradient(180deg,#fff 35%,#FFE9A8);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 5px rgba(0,0,0,.28))}
+#ahead em{font-family:'Great Vibes','Brush Script MT','Segoe Script',cursive;font-style:normal;font-size:28px;color:#D6FFF8}
+#ahead .ecg{display:block;width:100%;height:20px}
+#ahead .ecg path{fill:none;stroke:#BFFFF5;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:90 510;animation:ecg 3.2s linear infinite}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes ecg{from{stroke-dashoffset:0}to{stroke-dashoffset:-600}}
+@media (prefers-reduced-motion:reduce){#ahead .track,#ahead .ecg path{animation:none}}
+@media (max-width:520px){#ahead b{font-size:24px}#ahead em{font-size:22px}}
+.top,.bar-b{border-color:var(--line)}
+.qcard,.opt{border-color:var(--line)}
+
+/* ---- Glass look ---- */
+:root{--glass:rgba(255,255,255,.55);--glass-2:rgba(255,255,255,.36);--glass-bd:rgba(255,255,255,.75);--glass-sh:0 8px 32px rgba(11,95,102,.14),inset 0 1px 0 rgba(255,255,255,.7)}
+@media (prefers-color-scheme: dark){:root{--glass:rgba(16,48,53,.55);--glass-2:rgba(16,48,53,.38);--glass-bd:rgba(255,255,255,.14);--glass-sh:0 8px 32px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08)}}
+body::before{content:"";position:fixed;inset:-10%;z-index:-1;pointer-events:none;background:radial-gradient(420px 420px at 12% 18%,rgba(18,179,166,.38),transparent 70%),radial-gradient(520px 520px at 88% 12%,rgba(76,170,255,.28),transparent 70%),radial-gradient(480px 480px at 70% 88%,rgba(126,224,214,.40),transparent 70%),radial-gradient(380px 380px at 8% 85%,rgba(150,120,255,.20),transparent 70%)}
+#ahead,#app{position:relative;z-index:1}
+.qcard,.opt,.sheet,.exp,.modal .box,.top,.bar-b,.btn,.chip,input[type=text],input[type=number],textarea,select{-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%)}
+.qcard,.opt,.sheet,.exp{background:var(--glass);border:1px solid var(--glass-bd);box-shadow:var(--glass-sh)}
+.qcard{border-radius:20px}
+.qcard.img{background:var(--glass)}
+.qcard .qimg{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(11,95,102,.12)}
+.opt:not(:disabled):hover{background:var(--glass-2);transform:translateY(-1px)}
+.opt{transition:transform .15s,background .15s,box-shadow .15s}
+.opt.sel{background:color-mix(in srgb,var(--blue-soft) 75%,transparent);border-color:var(--blue)}
+.opt.ok{background:color-mix(in srgb,var(--ok-soft) 78%,transparent);border-color:var(--ok)}
+.opt.bad{background:color-mix(in srgb,var(--bad-soft) 78%,transparent);border-color:var(--bad)}
+.sheet{border-left:1px solid var(--glass-bd);border-radius:18px}
+.top,.bar-b{background:var(--glass);border-color:var(--glass-bd);box-shadow:0 4px 24px rgba(11,95,102,.10)}
+.btn{background:var(--glass-2);border:1px solid var(--glass-bd);box-shadow:var(--glass-sh)}
+.btn.primary{background:linear-gradient(180deg,rgba(23,170,166,.95),rgba(11,127,134,.92));border-color:rgba(255,255,255,.45);color:#fff;box-shadow:0 8px 22px rgba(11,127,134,.38),inset 0 1px 0 rgba(255,255,255,.4)}
+.chip{background:var(--glass-2);border-color:var(--glass-bd)}
+input[type=text],input[type=number],textarea,select{background:var(--glass-2);border:1px solid var(--glass-bd);box-shadow:inset 0 1px 3px rgba(11,95,102,.10)}
+.modal{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.modal .box{background:var(--glass);border:1px solid var(--glass-bd);box-shadow:var(--glass-sh)}
+.exp.img{background:var(--glass);color:var(--ink)}.exp.img b{color:var(--ink)}
+.item{border-bottom-color:var(--glass-bd)}
+#ahead .hrt{display:inline-block;font-family:'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif;font-size:.8em;animation:hb 1.4s ease-in-out infinite}
+@keyframes hb{0%,60%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+@media (prefers-reduced-motion:reduce){#ahead .hrt{animation:none}}
+#ahead .mq{padding:3px 0 0}
+#ahead .mi{padding:0 30px;gap:0}
+#ahead em{font-size:22px;line-height:1.25}
+#ahead .ecg{height:8px}
+#ahead{border-bottom-width:2px}
+@media (max-width:520px){#ahead em{font-size:19px}}
+</style>
+</head>
+<body>
+<header id="ahead" aria-label="AMAN"><div class="mq"><div class="track"><span class="grp"><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span></span><span class="grp"><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span><span class="mi"><em>Made with <span class="hrt">❤️</span> Aman</em></span></span></div></div><svg class="ecg" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="600" d="M0 12 H40 L46 12 L52 3 L58 21 L64 8 L70 12 H120 H160 L166 12 L172 3 L178 21 L184 8 L190 12 H240 H280 L286 12 L292 3 L298 21 L304 8 L310 12 H360 H400 L406 12 L412 3 L418 21 L424 8 L430 12 H480 H520 L526 12 L532 3 L538 21 L544 8 L550 12 H600"/></svg></header>
+<div id="app"></div>
+<script>
+"use strict";
+/* ---------- helpers ---------- */
+const app=document.getElementById('app');
+function h(tag,attrs,...kids){
+  const e=document.createElement(tag);
+  for(const k in (attrs||{})){
+    const v=attrs[k];
+    if(k==='class')e.className=v;
+    else if(k.slice(0,2)==='on')e.addEventListener(k.slice(2),v);
+    else if(v!==false&&v!=null)e.setAttribute(k,v===true?'':v);
+  }
+  for(const c of kids.flat(Infinity)){
+    if(c==null||c===false)continue;
+    e.append(c.nodeType?c:document.createTextNode(String(c)));
+  }
+  return e;
+}
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}
+};
+const IDB={open(){return this._p||(this._p=new Promise(res=>{try{const r=indexedDB.open('mcqimg',1);r.onupgradeneeded=()=>r.result.createObjectStore('i');r.onsuccess=()=>res(r.result);r.onerror=()=>res(null)}catch(e){res(null)}}))},
+  async put(k,v){const d=await this.open();if(!d)return false;return new Promise(r=>{try{const t=d.transaction('i','readwrite');t.objectStore('i').put(v,k);t.oncomplete=()=>r(true);t.onerror=()=>r(false);t.onabort=()=>r(false)}catch(e){r(false)}})},
+  async get(k){const d=await this.open();if(!d)return null;return new Promise(r=>{try{const q=d.transaction('i').objectStore('i').get(k);q.onsuccess=()=>r(q.result||null);q.onerror=()=>r(null)}catch(e){r(null)}})}};
+const SAVEDQ=new WeakSet();
+let TESTS=store.get('mcq.tests',[]);
+TESTS.forEach(t=>t.questions.forEach(q=>{if(q.full&&!q.image&&!q.im)q.full=false}));
+const SAVEDE=new WeakSet();
+(async()=>{for(const t of TESTS)for(const q of t.questions){
+  if(q.im&&!q.image){const v=await IDB.get(t.id+':'+q.id);if(v){q.image=v;SAVEDQ.add(q)}else q.full=false}
+  if(q.ie&&!q.expImage){const v=await IDB.get(t.id+':'+q.id+':e');if(v){q.expImage=v;SAVEDE.add(q)}}}})();
+let HIST=store.get('mcq.hist',[]);
+let FAV=store.get('mcq.fav',[]);
+const saveFav=()=>{const ok=store.set('mcq.fav',FAV);if(!ok)S.warn=true;return ok};
+const isFav=(tid,qid)=>FAV.some(f=>f.t===tid&&f.i===qid);
+function toggleFav(tid,qid){
+  if(!tid)return;
+  if(isFav(tid,qid))FAV=FAV.filter(f=>!(f.t===tid&&f.i===qid));
+  else FAV.unshift({t:tid,i:qid,d:Date.now()});
+  saveFav();
+}
+const favBtn=(tid,qid,after)=>{const on=isFav(tid,qid);
+  return h('button',{class:'btn sm',style:'margin-left:auto;'+(on?'color:#B7791F;font-weight:700':''),'aria-pressed':on?'true':'false','aria-label':on?'Remove from favorites':'Save to favorites',onclick:()=>{toggleFav(tid,qid);after()}},on?'★ Saved':'☆ Favorite')};
+const S={view:'home',quiz:null,result:null,filter:'all',timer:null,modal:false,warn:false};
+const saveTests=()=>{
+  const lite=TESTS.map(t=>Object.assign({},t,{questions:t.questions.map(q=>{
+    if(!q.image&&!q.expImage)return q;
+    const o=Object.assign({},q);
+    if(q.image){if(!SAVEDQ.has(q)){SAVEDQ.add(q);IDB.put(t.id+':'+q.id,q.image).then(ok=>{if(!ok)S.warn=true})}o.image=null;o.im=1}
+    if(q.expImage){if(!SAVEDE.has(q)){SAVEDE.add(q);IDB.put(t.id+':'+q.id+':e',q.expImage).then(ok=>{if(!ok)S.warn=true})}o.expImage=null;o.ie=1}
+    return o})}));
+  const ok=store.set('mcq.tests',lite);if(!ok)S.warn=true;return ok};
+const saveHist=()=>{const ok=store.set('mcq.hist',HIST);if(!ok)S.warn=true;return ok};
+S.warn=!store.set('mcq.probe',1);
+const fmt=s=>{s=Math.max(0,Math.round(s));const hh=Math.floor(s/3600),mm=Math.floor(s%3600/60),ss=s%60;
+  const p=n=>String(n).padStart(2,'0');return hh?`${hh}:${p(mm)}:${p(ss)}`:`${p(mm)}:${p(ss)}`};
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function mount(...nodes){app.replaceChildren(...nodes);window.scrollTo(0,0)}
+function brand(sub){
+  return h('div',null,
+    h('div',{class:'brand'},h('h1',null,'MCQ Practice Sheet'),
+      h('div',{class:'omr','aria-hidden':'true'},h('i'),h('i',{class:'f'}),h('i'),h('i'))),
+    sub?h('p',{class:'muted'},sub):null);
+}
+
+/* ---------- question as image ---------- */
+const IMGC=new Map();
+const ot=(q,k)=>q.full?'Option '+(k+1):q.options[k];
+function textImg(text){
+  const W=Math.max(240,Math.min(688,window.innerWidth-32));
+  const key=W+'|'+text;
+  let url=IMGC.get(key);
+  if(!url){
+    const fs=18,lh=Math.round(fs*1.6),pad=12,sc=2;
+    const font=fs+'px "Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif';
+    const m=document.createElement('canvas').getContext('2d');m.font=font;
+    const lines=[];
+    for(const para of String(text).split('\n')){
+      if(!para.trim()){lines.push('');continue}
+      let line='';
+      for(const word of para.split(/\s+/)){
+        const t=line?line+' '+word:word;
+        if(m.measureText(t).width>W-2*pad&&line){lines.push(line);line=word}else line=t;
+      }
+      lines.push(line);
+    }
+    const c=document.createElement('canvas');
+    c.width=Math.round(W*sc);c.height=Math.round((lines.length*lh+2*pad)*sc);
+    const g=c.getContext('2d');g.scale(sc,sc);
+    g.fillStyle='#fff';g.fillRect(0,0,W,lines.length*lh+2*pad);
+    g.fillStyle='#14213D';g.font=font;g.textBaseline='middle';
+    lines.forEach((l,i)=>g.fillText(l,pad,pad+i*lh+lh/2));
+    url=c.toDataURL('image/jpeg',0.85);
+    IMGC.set(key,url);
+  }
+  return {url,W};
+}
+function qView(q){
+  const out=[];
+  if(q.image)out.push(h('img',{class:'qimg',src:q.image,alt:q.full?(q.text||'Question'):'Question figure'}));
+  if(q.full)return [h('div',{class:'qcard img'},out)];
+  if(String(q.text||'').trim())out.push(h('div',{class:'qtext'},q.text));
+  return [h('div',{class:'qcard'},out)];
+}
+function expBox(q){
+  if(!q.explanation&&!q.expImage)return h('p',{class:'note'},'No solution in this test yet. Upload an answer key with solutions (PDF) to see it here.');
+  return h('div',{class:'exp'+(q.expImage?' img':'')},h('b',null,q.expImage?'Solution':'Explanation'),
+    q.expImage?h('img',{class:'qimg',src:q.expImage,alt:'Solution'}):null,
+    (q.explanation&&!q.expImage)?h('div',null,q.explanation):null);
+}
+
+/* ---------- parsing ---------- */
+function parseAns(a,n){
+  if(a==null||a==='')return null;
+  if(typeof a==='number')return a>=1&&a<=n?a-1:null;
+  const s=String(a).trim().replace(/[()]/g,'');
+  if(/^[1-9]$/.test(s)){const v=+s;return v<=n?v-1:null}
+  if(/^[A-Za-z]$/.test(s)){const v=s.toUpperCase().charCodeAt(0)-65;return v<n?v:null}
+  return null;
+}
+function parseKey(t){
+  const m={};const re=/(\d{1,3})\s*[-:.=)\s]\s*\(?\s*([1-4A-Da-d])\b\)?/g;let x;
+  while((x=re.exec(t)))m[+x[1]]=x[2];
+  return m;
+}
+function applyKey(qs,map){
+  let n=0;
+  for(const q of qs){
+    let v=map[q.id];if(v==null)continue;
+    let ex=null;
+    if(typeof v==='object'){ex=v.explanation||v.exp||v.solution||null;v=v.answer!=null?v.answer:(v.correct!=null?v.correct:v.ans)}
+    const a=parseAns(v,q.options.length);
+    if(a!=null){q.answer=a;n++}
+    if(ex){q.explanation=String(ex);if(a==null)n++}
+  }
+  return n;
+}
+function keyFromText(t){
+  const lines=t.split(/\n/).map(x=>x.trim()).filter(Boolean);
+  const lre=/^(\d{1,3})(?:\s*[,;:\t.)=-]\s*|\s+)\(?([1-4A-Da-d])\)?$/;
+  let body=lines;
+  if(body.length&&!lre.test(body[0])&&/[A-Za-z]{3,}/.test(body[0]))body=body.slice(1);
+  if(body.length>1&&body.every(x=>lre.test(x))){
+    const m={};body.forEach(x=>{const r=x.match(lre);m[+r[1]]=r[2]});return {pairs:m};
+  }
+  const single=/^\(?[1-4A-Da-d]\)?$/;
+  let toks=t.split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean);
+  if(toks.length===1)toks=toks[0].split(/\s+/);
+  if(toks.length>1&&toks.every(x=>single.test(x)))return {seq:toks.map(x=>x.replace(/[()]/g,''))};
+  return {pairs:parseKey(t)};
+}
+function blockExplain(qs,t){
+  const st=/^\s*(?:Q(?:uestion)?\.?\s*)?(\d{1,3})\s*[.):\-|,]\s*(.*)$/i,blocks=[];let cur=null,last=0;
+  for(const ln of t.split('\n')){
+    const m=ln.match(st);
+    if(m){const n=+m[1];if(!cur||(n>last&&n<=last+3)){cur={n,body:[m[2]]};blocks.push(cur);last=n;continue}}
+    if(cur)cur.body.push(ln);
+  }
+  let c=0;
+  for(const b of blocks){
+    const q=qs.find(z=>z.id===b.n);if(!q||q.explanation)continue;
+    let x=b.body.join('\n').trim();
+    const r1=/^\s*Ans(?:wer)?\.?\s*[:\-=]?\s*\(?[1-4A-Da-d]\)?(?=[\s.,:;|]|$)\s*[.,:;|\-–—]?\s*/i,r2=/^\s*\([1-4A-Da-d]\)\s*[.,:;|\-–—]?\s*/,r4=/^\s*[1-4A-Da-d]\s*[|,]\s*/;
+    x=r1.test(x)?x.replace(r1,''):r2.test(x)?x.replace(r2,''):x.replace(r4,'');
+    x=x.replace(/^\s*(?:Explanation|Solution|Sol|Hint|Exp)\.?\s*[:\-–—]?\s*/i,'').trim();
+    if(x.length>=15&&/[A-Za-z\u0900-\u097F]{3,}/.test(x)){q.explanation=x;c++}
+  }
+  return c;
+}
+function attachSolutions(qs,crops){
+  if(!crops||!crops.length)return 0;
+  const m=new Map();crops.forEach(c=>{const o=m.get(c.num);if(!o||c.lines>o.lines)m.set(c.num,c)});
+  const hit=qs.filter(q=>m.has(q.id)).length;
+  if(hit>=qs.length*0.6){qs.forEach(q=>{const c=m.get(q.id);if(c)q.expImage=c.url});return hit}
+  const arr=crops.filter(c=>c.lines>=2);
+  qs.forEach((q,i)=>{if(arr[i])q.expImage=arr[i].url});
+  return Math.min(qs.length,arr.length);
+}
+function applyAnswers(qs,text){
+  const t=text.trim();if(!t)return 0;
+  let n=0;
+  if(t[0]==='['||t[0]==='{'){
+    let d;try{d=JSON.parse(t)}catch(e){throw new Error('The answers look like JSON but could not be read.')}
+    if(!Array.isArray(d)&&Array.isArray(d.questions))d=d.questions;
+    if(Array.isArray(d)){
+      d.forEach((x,i)=>{
+        let a=x,q=qs[i],ex=null;
+        if(x&&typeof x==='object'){
+          ex=x.explanation||x.exp||x.solution||null;
+          a=x.answer!=null?x.answer:(x.correct!=null?x.correct:x.ans);
+          const k=x.id!=null?x.id:(x.number!=null?x.number:x.q);
+          if(k!=null)q=qs.find(z=>z.id===Number(k));
+        }
+        const v=q?parseAns(a,q.options.length):null;
+        if(q&&v!=null){q.answer=v;n++}
+        if(q&&ex){q.explanation=String(ex);if(v==null)n++}
+      });
+    }else{const m={};for(const k in d)m[Number(k)]=d[k];n=applyKey(qs,m)}
+    return n;
+  }
+  const strictM={};let sc=0;
+  for(const ln of t.split('\n')){
+    if(/^(?:\s*\d{1,3}\s*[.:)]\s*\([1-4A-Da-d]\)\s*)+$/.test(ln))
+      for(const m of ln.matchAll(/(\d{1,3})\s*[.:)]\s*\(([1-4A-Da-d])\)/g))if(!(m[1] in strictM)){strictM[m[1]]=m[2];sc++}
+  }
+  if(sc>=10){n=applyKey(qs,strictM);blockExplain(qs,t);return n}
+  const expLine=/^\s*(\d{1,3})\s*[-:.=)]\s*\(?([1-4A-Da-d])\)?\s*(?:[|:–—-]|\s)\s*(.+)$/;
+  const rest=[];
+  for(const ln of t.split('\n')){
+    const m=ln.match(expLine);
+    if(m&&/[A-Za-z\u0900-\u097F]{3,}/.test(m[3])){
+      const q=qs.find(z=>z.id===+m[1]);
+      if(q){const a=parseAns(m[2],q.options.length);if(a!=null){q.answer=a;n++}q.explanation=m[3].trim()}
+    }else rest.push(ln);
+  }
+  blockExplain(qs,t);
+  const t2=rest.join('\n').trim();
+  if(!t2)return n;
+  const k=keyFromText(t2);
+  if(k.seq){k.seq.forEach((a,i)=>{const q=qs[i];if(q){const v=parseAns(a,q.options.length);if(v!=null){q.answer=v;n++}}})}
+  else n=applyKey(qs,k.pairs);
+  return n;
+}
+function fromJSON(txt){
+  const d=JSON.parse(txt);
+  const arr=Array.isArray(d)?d:(d.questions||[]);
+  const name=(d.test&&d.test.name)||d.name||'';
+  const qs=[];
+  arr.forEach((r,i)=>{
+    const opts=r.options||r.choices||r.opts;
+    if(!Array.isArray(opts)||opts.length<2)return;
+    qs.push({id:Number(r.id)||i+1,subject:r.subject||'General',
+      text:String(r.question||r.text||r.q||''),options:opts.map(String),
+      answer:parseAns(r.answer!=null?r.answer:(r.correct!=null?r.correct:r.ans),opts.length),
+      explanation:String(r.explanation||r.exp||r.solution||''),
+      fig:!!(r.has_figure||r.fig),image:typeof r.image==='string'?r.image:null});
+  });
+  return {name,questions:qs};
+}
+function fromText(txt){
+  txt=txt.replace(/^[ \t]*Q(?:uestion)?\.?[ \t]*(\d{1,3})[ \t]+(?=\S)/gim,'$1. ');
+  const rng=[];for(const m of txt.matchAll(/\b(Physics|Chemistry|Botany|Zoology|Biology|Mathematics|Maths)\s*,?\s*(\d{1,3})\s*[-\u2013]\s*(\d{1,3})\b/gi))rng.push([m[1][0].toUpperCase()+m[1].slice(1).toLowerCase(),+m[2],+m[3]]);
+  const lines=txt.replace(/\r/g,'').split('\n');
+  const nNum=(txt.match(/^\s*\(1\)/gm)||[]).length+(txt.match(/^\s*1\)/gm)||[]).length;
+  const nLet=(txt.match(/^\s*\(A\)/gm)||[]).length+(txt.match(/^\s*A\)/gm)||[]).length;
+  const letters=nLet>nNum;
+  const optRe=letters?/^\s*\(?([A-D])\)\s*(.*)$/:/^\s*\(?([1-4])\)\s*(.*)$/;
+  const qRe=/^\s*(?:Q\.?\s*)?(\d{1,3})\s*[.:]\s+(.+)$/i;
+  const ansRe=/^\s*(?:answer|ans|correct(?:\s+answer|\s+option)?)\s*[:\-=]?\s*\(?([1-4A-Da-d])\)?\s*$/i;
+  const keyRe=/^\s*(?:answer\s*key|answers|key)\s*:?\s*$/i;
+  const subjRe=/^\s*(?:section\s*\w*\s*[-:]?\s*)?(physics|chemistry|botany|zoology|biology|mathematics|maths)\s*:?\s*$/i;
+  const qs=[];let cur=null,subj='General',inKey=false,keyText='';
+  const expRe=/^\s*(?:explanation|exp|solution|व्याख्या|हल)\s*[:=-]\s*(.*)$/i;
+  for(const raw of lines){
+    if(inKey){keyText+=raw+'\n';continue}
+    if(!raw.trim())continue;
+    if(/^\s*\d{1,3}\s*$/.test(raw))continue;           // lone page numbers
+    if(keyRe.test(raw)){inKey=true;continue}
+    const sm=raw.match(subjRe);
+    if(sm){subj=sm[1][0].toUpperCase()+sm[1].slice(1).toLowerCase();continue}
+    const am=cur&&raw.match(ansRe);
+    if(am){cur.answer=parseAns(am[1],cur.options.length);continue}
+    const em=cur&&raw.match(expRe);
+    if(em){cur.explanation=em[1].trim();cur._x=true;continue}
+    const om=cur&&raw.match(optRe);
+    if(om){
+      const idx=letters?om[1].charCodeAt(0)-65:Number(om[1])-1;
+      if(idx===cur.options.length){cur.options.push(om[2].trim());continue}
+    }
+    const qm=raw.match(qRe);
+    if(qm){
+      const num=Number(qm[1]);
+      if(num===1&&qs.length&&qs.every(z=>z.options.length<2)){qs.length=0;cur=null}
+      if(!cur||cur.options.length>=2||num===cur.id+1){
+        cur={id:num,subject:subj,text:qm[2].trim(),options:[],answer:null,explanation:'',fig:false,image:null};
+        qs.push(cur);continue;
+      }
+    }
+    if(cur){
+      if(cur._x)cur.explanation+='\n'+raw.trim();
+      else if(cur.options.length)cur.options[cur.options.length-1]+=' '+raw.trim();
+      else cur.text+='\n'+raw.trim();
+    }
+  }
+  qs.forEach(q=>{delete q._x});
+  const good=qs.filter(q=>q.options.length>=2);
+  if(rng.length)good.forEach(q=>{if(q.subject==='General'){const r=rng.find(r=>q.id>=r[1]&&q.id<=r[2]);if(r)q.subject=r[0]}});
+  if(keyText){try{applyAnswers(good,keyText)}catch(e){}}
+  return {name:'',questions:good};
+}
+function parseAny(txt){
+  const t=txt.trim();
+  if(!t)throw new Error('Nothing to load. Upload a file or paste your questions.');
+  let r;
+  if(t[0]==='{'||t[0]==='['){
+    try{r=fromJSON(t)}catch(e){throw new Error('This looks like JSON but could not be read: '+e.message)}
+  }else r=fromText(t);
+  if(!r.questions.length)throw new Error('No questions found. Each question needs at least 2 options like (1) … (2) … — see the format guide below.');
+  return r;
+}
+
+/* ---------- home ---------- */
+const SAMPLE=JSON.stringify({test:{name:"Sample test"},questions:[
+ {id:1,subject:"Physics",question:"Unit of specific heat capacity is",options:["J kg K⁻¹","J kg K","J kg⁻¹ K⁻¹","J⁻¹ kg K"],answer:3,explanation:"Q = m c ΔT, so c = Q / (m ΔT). Unit = J / (kg K) = J kg⁻¹ K⁻¹."},
+ {id:2,subject:"Chemistry",question:"Chlorine on reaction with hot and concentrated NaOH gives",options:["Hypochlorite and chloride","Hypochlorite and perchlorate","Perchlorate and chloride","Chlorate and chloride"],answer:4,explanation:"3Cl₂ + 6NaOH (hot, conc.) → 5NaCl + NaClO₃ + 3H₂O. So chloride and chlorate form."},
+ {id:3,subject:"Zoology",question:"The QRS complex in a standard ECG of a normal healthy human denotes",options:["Depolarisation of the atria","Depolarisation of the ventricles","Repolarisation of the ventricles","Repolarisation of the atria and ventricles"],answer:2,explanation:"QRS complex = ventricular depolarisation (atrial repolarisation is hidden inside it)."}
+]},null,2);
+
+/* ---------- PDF -> text ---------- */
+const PDFJS_V='3.11.174',CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/'+PDFJS_V+'/';
+let pdfjsP=null;
+function loadPdfJs(){
+  if(window.pdfjsLib)return Promise.resolve(window.pdfjsLib);
+  if(pdfjsP)return pdfjsP;
+  pdfjsP=new Promise((res,rej)=>{
+    const sc=document.createElement('script');sc.src=CDN+'pdf.min.js';
+    sc.onload=()=>{if(!window.pdfjsLib){pdfjsP=null;return rej(new Error('PDF reader did not load.'))}
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc=CDN+'pdf.worker.min.js';res(window.pdfjsLib)};
+    sc.onerror=()=>{pdfjsP=null;rej(new Error('Could not load the PDF reader. Check your internet connection and try again.'))};
+    document.head.append(sc);
+  });
+  return pdfjsP;
+}
+const SYMG_L='αβχδεφγηιϕκλμνοπθρστυϖωξψζ',SYMG_U='ΑΒΧΔΕΦΓΗΙϑΚΛΜΝΟΠΘΡΣΤΥςΩΞΨΖ';
+const SYMX={0xA3:'≤',0xA5:'∞',0xB0:'°',0xB1:'±',0xB2:'″',0xA2:'′',0xB3:'≥',0xB4:'×',0xB5:'∝',0xB6:'∂',0xB7:'•',0xB8:'÷',0xB9:'≠',0xBA:'≡',0xBB:'≈',0xD0:'∠',0xD1:'∇',0xD6:'√',0xD7:'⋅',0xAE:'→',0xAC:'←',0xAD:'↑',0xAF:'↓',0xAB:'↔',0xC5:'⊕',0xC7:'∩',0xC8:'∪',0xCC:'⊂',0xCE:'∈',0xE5:'∑',0xF2:'∫',0xD5:'∏',0x2D:'−',0xE0:'◊',0xB8:'÷',0xDE:'⇒',0xDB:'⇔'};
+const WM=/https?:\/\/|t\.me\/|youtube\.com|PWTestSeries|Real_Test_by_PW/i;
+const BRK={0xE6:'(',0xE7:'',0xE8:'',0xF6:')',0xF7:'',0xF8:'',0xE9:'[',0xEA:'',0xEB:'',0xF9:']',0xFA:'',0xFB:'',0xEC:'{',0xED:'',0xEE:'',0xFC:'}',0xFD:'',0xFE:'',0xBE:'',0xEF:'',0xF4:''};
+function fixGlyphs(t){
+  return t.replace(/[\u0000-\u0008\u000B-\u001F\u00AD\u200B-\u200F\uFEFF]/g,'').replace(/[\uE000-\uF8FF]/g,c=>{
+    const code=c.charCodeAt(0),lo=code&255;
+    if(code>=0xF020&&code<=0xF0FF){
+      if(BRK[lo]!==undefined)return BRK[lo];
+      if(SYMX[lo])return SYMX[lo];
+      if(lo>=0x61&&lo<=0x7A)return SYMG_L[lo-0x61];
+      if(lo>=0x41&&lo<=0x5A)return SYMG_U[lo-0x41];
+      if(lo>=0x20&&lo<0x7F)return String.fromCharCode(lo);
+    }
+    return '';
+  });
+}
+const SUPM={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','+':'⁺','-':'⁻','−':'⁻','=':'⁼','(':'⁽',')':'⁾','n':'ⁿ','i':'ⁱ'};
+const SUBM={'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉','+':'₊','-':'₋','−':'₋','=':'₌','(':'₍',')':'₎'};
+function conv(t,m,mark){let o='';for(const c of t){if(m[c])o+=m[c];else if(c===' ')o+=c;else return mark+t}return o}
+function groupLines(its){
+  its.sort((a,b)=>b.y-a.y);
+  const lines=[];
+  for(const it of its){
+    const L=lines[lines.length-1];
+    if(L&&Math.abs(L.y-it.y)<=Math.max(2,0.65*Math.max(L.fs,it.fs))){L.items.push(it);if(it.fs>L.fs){L.fs=it.fs;L.y=it.y}}
+    else lines.push({y:it.y,fs:it.fs,items:[it]});
+  }
+  return lines.map(L=>{
+    L.items.sort((a,b)=>a.x-b.x);
+    const wt=new Map();for(const it of L.items){const k=Math.round(it.fs*2)/2;wt.set(k,(wt.get(k)||0)+it.str.trim().length)}
+    let rf=L.fs,bw=-1;wt.forEach((w,k)=>{if(w>bw||(w===bw&&k>rf)){bw=w;rf=k}});
+    const bs=L.items.filter(i=>Math.abs(i.fs-rf)<=0.5&&i.str.trim());
+    const ry=bs.length?bs.reduce((a,i)=>a+i.y,0)/bs.length:L.y,rfs=bs.length?rf:L.fs;
+    let t='',end=null,x0=1e9,x1=-1e9,top=-1e9,bot=1e9;
+    for(const it of L.items){
+      let str=it.str;
+      if(it.fs<rfs*0.85&&str.trim()){const dy=it.y-ry;
+        if(dy>rfs*0.2)str=conv(str,SUPM,'^');else if(dy<-rfs*0.15)str=conv(str,SUBM,'_')}
+      if(end!=null&&it.x-end>it.fs*0.2&&!/\s$/.test(t)&&!/^\s/.test(str))t+=' ';
+      t+=str;end=it.x+it.w;
+      if(str.trim()){x0=Math.min(x0,it.x);x1=Math.max(x1,it.x+it.w);top=Math.max(top,it.y+it.fs*0.95);bot=Math.min(bot,it.y-it.fs*0.3)}
+    }
+    return {t:t.replace(/\s+/g,' ').trim(),x0,x1,top,bot};
+  }).filter(l=>l.t);
+}
+function pageLines(items,W){
+  const its=items.map(i=>({str:fixGlyphs(i.str||''),x:i.transform[4],y:i.transform[5],w:i.width||0,fs:Math.abs(i.transform[3])||i.height||10})).filter(i=>i.str.length&&!WM.test(i.str));
+  const real=its.filter(i=>i.str.trim());
+  const mid=W/2,cross=real.filter(i=>i.x<mid-8&&i.x+i.w>mid+8).length;
+  const left=real.filter(i=>i.x<mid).length,right=real.length-left;
+  const two=real.length>20&&cross<=real.length*0.06&&left>real.length*0.25&&right>real.length*0.25;
+  if(!two){const A=groupLines(its);A.forEach(l=>l.col=0);return A}
+  const A=groupLines(its.filter(i=>i.x<mid)),B=groupLines(its.filter(i=>i.x>=mid));A.forEach(l=>l.col=0);B.forEach(l=>l.col=1);return A.concat(B);
+}
+function dropRepeats(pages){
+  if(pages.length<3)return pages;
+  const norm=l=>l.replace(/\d+/g,'#').toLowerCase(),cnt={};
+  pages.forEach(p=>new Set(p.map(l=>norm(l.t))).forEach(k=>cnt[k]=(cnt[k]||0)+1));
+  const lim=Math.max(3,Math.ceil(pages.length*0.6));
+  const pk=l=>norm(l.t)+'|'+Math.round(l.top/5),pc={};
+  pages.forEach(p=>new Set(p.map(pk)).forEach(k=>pc[k]=(pc[k]||0)+1));
+  const isHF=l=>l.ph&&(l.top>l.ph*0.85||l.bot<l.ph*0.12)&&l.t.length>=8&&l.t.length<60&&pc[pk(l)]>=3&&!/^\s*(?:q\.?\s*)?[(\[]?(?:\d{1,3}|[a-d])[)\].:]/i.test(l.t)&&!/^(physics|chemistry|botany|zoology|biology|mathematics|maths)$/i.test(l.t.trim());
+  const keep0=l=>l.t.length>=80||/^\s*(?:q\.?\s*)?[(\[]?(?:\d{1,3}|[a-d])[)\].:]/i.test(l.t)||/^(physics|chemistry|botany|zoology|biology|mathematics|maths)$/i.test(l.t.trim())||cnt[norm(l.t)]<lim;
+  const keep=l=>keep0(l)&&!isHF(l);
+  return pages.map(p=>p.filter(keep));
+}
+function prepPdfText(t){
+  const out=[];
+  for(let ln of t.split('\n')){
+    ln=ln.replace(/^\s*Q(?:uestion|ues)?\.?\s*(\d{1,3})(?:\s*[.:)\-]\s*|\s+)/i,'$1. ').replace(/^\s*Question\s+(\d{1,3})\s+/i,'$1. ');
+    ln=ln.replace(/^\s*\(([a-d])\)/,(m,c)=>'('+c.toUpperCase()+')');
+    if((ln.match(/\([1-4]\)/g)||[]).length>=2)ln=ln.replace(/\s*\(([1-4])\)\s*/g,(m,d)=>'\n('+d+') ');
+    else if((ln.match(/\([A-Da-d]\)/g)||[]).length>=2)ln=ln.replace(/\s*\(([A-Da-d])\)\s*/g,(m,c)=>'\n('+c.toUpperCase()+') ');
+    out.push(ln);
+  }
+  return out.join('\n');
+}
+const START_RE=/^\s*(?:Q(?:uestion|ues)?\.?\s*(\d{1,3})(?:\s*[.:)\-]|\s+(?=\S))|(\d{1,3})\s*[.:](?=\s|[A-Za-z]))/i;
+const SKIP_RE=/^\s*(?:(?:section|part)\b.{0,24}|physics|chemistry|botany|zoology|biology|mathematics|maths)\s*:?\s*$/i;
+const KEY_RE=/^\s*(?:answer\s*key|answers?|key)\s*:?\s*$/i;
+const optN=t=>new Set(t.match(/\(([1-4A-Da-d])\)/g)||[]).size;
+/* if the next question number is glued mid-line (tall maths symbols etc.), split the line there */
+function fixStarts(pages){
+  let last=0,acc='';
+  return pages.map(pg=>{
+    const out=[];
+    for(const l of pg){
+      const m=l.t.match(START_RE);
+      if(m){const n=+(m[1]||m[2]);if(n>last&&(last===0?n<=400:n<=last+3)){last=n;acc=l.t}else acc+='\n'+l.t;out.push(l);continue}
+      if(last&&optN(acc)>=2){
+        const re=new RegExp('(?:^|\\s)('+(last+1)+')\\s*[.:](?=\\s|$|[A-Za-z\\u0900-\\u097F\\u222B\\u221A(])');
+        const mm=re.exec(l.t);
+        if(mm){
+          const idx=mm.index+mm[0].indexOf(mm[1]),pre=l.t.slice(0,idx).trim(),post=l.t.slice(idx).trim();
+          if(pre.length>=3&&/[A-Za-z0-9]/.test(pre)){out.push(Object.assign({},l,{t:pre}));acc+='\n'+pre}
+          out.push(Object.assign({},l,{t:post}));last+=1;acc=post;continue
+        }
+      }
+      acc+='\n'+l.t;out.push(l);
+    }
+    return out;
+  });
+}
+/* answer-key PDFs often repeat the question before the solution: keep only the solution part */
+const SOL_RE=/^\s*(?:Ans(?:wer)?|Sol(?:ution)?|Explanation|Exp|Correct(?:\s+(?:answer|option))?|Hint)\b/i;
+function stripQuestionPart(q){
+  const L=q.lines;if(L.length<2)return;
+  let i=-1;
+  for(let k=1;k<L.length;k++){if(SOL_RE.test(L[k].t)){i=k;break}}
+  if(i<0){
+    let o4=-1;
+    for(let k=0;k<L.length;k++){if(/^\s*\(?(?:4|D)[).]/i.test(L[k].t))o4=k}
+    if(o4<0)return;
+    const pit=[];for(let k=1;k<L.length;k++){const d=L[k-1].top-L[k].top;if(d>0)pit.push(d)}
+    pit.sort((a,b)=>a-b);const med=pit.length?pit[pit.length>>1]:0;
+    i=o4+1;
+    if(med){for(let k=o4+1;k<L.length;k++){if(L[k-1].top-L[k].top>med*1.35||L[k].col!==L[k-1].col||L[k].page!==L[k-1].page){i=k;break}}}
+  }
+  if(i>0&&i<L.length){q.lines=L.slice(i);q.txt=q.lines.map(l=>l.t).join('\n')}
+  else if(i>=L.length){q.lines=[];q.txt=''}
+}
+async function cropQuestions(pdf,pages,onProg,nokey){
+  const qs=[];let cur=null,last=0;
+  for(const l of pages.flat()){
+    if(!nokey&&KEY_RE.test(l.t))break;
+    let m=l.t.match(START_RE)||(nokey&&l.t.match(/^\s*Q\.?\s*(\d{1,3})\b/i));
+    if(!m&&cur&&optN(cur.txt)>=2){const m2=l.t.match(/^\s*(\d{1,3})\s*[.:]\s*$/);if(m2&&+m2[1]===last+1)m=m2}
+    if(m){
+      const n=+(m[1]||m[2]),o=cur?optN(cur.txt):0;
+      if(n===1&&o<2&&qs.every(q=>optN(q.txt)<2)){qs.length=0;cur=null;last=0}
+      if(!cur||n===last+1||(o>=2&&n!==last)||(nokey&&n>last&&n<=last+5)){cur={num:n,lines:[l],txt:l.t,segs:[]};qs.push(cur);last=n;continue}
+    }
+    if(cur&&!SKIP_RE.test(l.t)){cur.lines.push(l);cur.txt+='\n'+l.t}
+  }
+  if(nokey)qs.forEach(stripQuestionPart);
+  const byPage={};
+  qs.forEach((q,qi)=>{
+    const g=new Map();
+    q.lines.forEach(l=>{const k=l.page+'-'+l.col;if(!g.has(k))g.set(k,[]);g.get(k).push(l)});
+    g.forEach(a=>{const sg={qi,page:a[0].page,x0:Math.min(...a.map(l=>l.x0)),x1:Math.max(...a.map(l=>l.x1)),top:Math.max(...a.map(l=>l.top)),bot:Math.min(...a.map(l=>l.bot))};
+      q.segs.push(sg);(byPage[sg.page]=byPage[sg.page]||[]).push(sg)});
+  });
+  for(const pn of Object.keys(byPage).map(Number).sort((a,b)=>a-b)){
+    if(onProg)onProg(pn,pdf.numPages,'Rendering');
+    const pg=await pdf.getPage(pn),vp=pg.getViewport({scale:2.6}),cv=document.createElement('canvas');
+    cv.width=Math.ceil(vp.width);cv.height=Math.ceil(vp.height);
+    const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,cv.width,cv.height);
+    await pg.render({canvasContext:cx,viewport:vp}).promise;
+    for(const sg of byPage[pn]){
+      const P=6,a=vp.convertToViewportPoint(sg.x0-12,sg.top+P),b=vp.convertToViewportPoint(sg.x1+12,sg.bot-P);
+      const sx=Math.max(0,Math.floor(Math.min(a[0],b[0]))),sy=Math.max(0,Math.floor(Math.min(a[1],b[1])));
+      const w=Math.min(cv.width-sx,Math.ceil(Math.abs(b[0]-a[0]))),h=Math.min(cv.height-sy,Math.ceil(Math.abs(b[1]-a[1])));
+      if(w<20||h<10)continue;
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(cv,sx,sy,w,h,0,0,w,h);
+      if(qs[sg.qi].segs.length===1)sg.url=c.toDataURL('image/jpeg',0.82);else sg.canvas=c;
+    }
+    cv.width=cv.height=0;
+  }
+  return qs.map(q=>{
+    const sg=q.segs.filter(x=>x.url||x.canvas);let url=null;
+    if(sg.length===1&&sg[0].url)url=sg[0].url;
+    else if(sg.length){
+      const W=Math.max(...sg.map(x=>x.canvas.width)),H=sg.reduce((a,x)=>a+x.canvas.height,0),c=document.createElement('canvas');
+      c.width=W;c.height=H;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);
+      let y=0;sg.forEach(x=>{g.drawImage(x.canvas,0,y);y+=x.canvas.height});url=c.toDataURL('image/jpeg',0.82);
+    }
+    return {num:q.num,url,lines:q.lines.length};
+  });
+}
+let ocrP=null;
+function getOcr(){
+  if(ocrP)return ocrP;
+  ocrP=(async()=>{
+    if(!window.Tesseract)await new Promise((res,rej)=>{const sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';sc.onload=res;sc.onerror=()=>rej(new Error('Could not load the OCR reader. Check your internet connection and try again.'));document.head.append(sc)});
+    return window.Tesseract.createWorker('eng');
+  })();
+  ocrP.catch(()=>{ocrP=null});
+  return ocrP;
+}
+/* pages that are only pictures: read them with OCR, in the same line format as real PDF text */
+async function ocrPage(pg,vp,p,N,onProg){
+  const S=2.2,v2=pg.getViewport({scale:S}),cv=document.createElement('canvas');
+  cv.width=Math.ceil(v2.width);cv.height=Math.ceil(v2.height);
+  const cx=cv.getContext('2d');cx.fillStyle='#fff';cx.fillRect(0,0,cv.width,cv.height);
+  await pg.render({canvasContext:cx,viewport:v2}).promise;
+  const wk=await getOcr(),H=vp.height,y0=Math.round(cv.height*0.06),hh=Math.round(cv.height*0.87),half=Math.floor(cv.width/2),out=[];
+  for(let c=0;c<2;c++){
+    if(onProg)onProg(p,N,'Reading text (OCR) from');
+    const part=document.createElement('canvas');part.width=half;part.height=hh;
+    part.getContext('2d').drawImage(cv,c*half,y0,half,hh,0,0,half,hh);
+    const r=await wk.recognize(part);
+    for(const l of (r.data.lines||[])){
+      const t=(l.text||'').replace(/\s+/g,' ').trim();
+      if(t.length<2)continue;
+      out.push({t,x0:(c*half+l.bbox.x0)/S,x1:(c*half+l.bbox.x1)/S,top:H-(y0+l.bbox.y0)/S,bot:H-(y0+l.bbox.y1)/S,col:c});
+    }
+  }
+  cv.width=cv.height=0;
+  return out;
+}
+async function pdfToText(file,onProg,prep,out){
+  const lib=await loadPdfJs();
+  let pdf;
+  try{pdf=await lib.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise}
+  catch(e){throw new Error('Could not open this PDF. It may be damaged or password-protected.')}
+  const pages=[];let chars=0,keySeen=false,stopOcr=false;
+  for(let p=1;p<=pdf.numPages;p++){
+    if(onProg)onProg(p,pdf.numPages,'Reading');
+    const pg=await pdf.getPage(p),vp=pg.getViewport({scale:1}),tc=await pg.getTextContent();
+    let ls0=pageLines(tc.items,vp.width);
+    if(ls0.reduce((a,l)=>a+l.t.length,0)<80){
+      if(stopOcr)ls0=[];
+      else{
+        ls0=await ocrPage(pg,vp,p,pdf.numPages,onProg);
+        if(!(out&&out.nokey)){
+          const nk=ls0.filter(l=>/^Q?\s*\d{1,3}\s*[(\[]\s*[1-4A-D]\s*[)\]]\s*$/i.test(l.t)).length;
+          if(nk>=10){if(!keySeen)ls0.unshift({t:'Answer Key',x0:0,x1:1,top:vp.height,bot:vp.height-1,col:0});keySeen=true}
+          else if(keySeen)stopOcr=true;
+        }
+      }
+    }
+    const ls=ls0.filter(l=>!((l.bot<vp.height*0.075||l.top>vp.height*0.94)&&l.t.length<14&&!/^\(?[1-4A-Da-d][).]/.test(l.t)&&!START_RE.test(l.t)));ls.forEach(l=>{l.page=p;l.ph=vp.height;chars+=l.t.length});pages.push(ls);
+  }
+  if(chars<30*pdf.numPages)throw new Error('No text found in this PDF. It looks like a scanned paper (photos of pages), which needs OCR. Use a PDF with selectable text.');
+  const kept=fixStarts(dropRepeats(pages));
+  const txt=kept.map(p=>p.map(l=>l.t).join('\n')).join('\n');
+  if(out)out.crops=await cropQuestions(pdf,kept,onProg,out.nokey);
+  return prep?prepPdfText(txt):txt;
+}
+const isPdf=f=>/\.pdf$/i.test(f.name)||f.type==='application/pdf';
+
+function wireFile(input,ta,msg,onFile,prep){
+  input.addEventListener('change',async()=>{
+    const f=input.files[0];if(!f)return;
+    try{if(isPdf(f)){msg.className='msg';msg.textContent='Reading PDF…';ta.value=await pdfToText(f,(p,n,v)=>{msg.textContent=(v||'Reading')+' PDF… page '+p+' of '+n},prep)}else ta.value=await f.text();if(onFile)onFile(f);msg.className='msg';msg.textContent='Loaded '+f.name+'.'}
+    catch(e){msg.className='msg err';msg.textContent=e.message||'Could not read that file.'}
+  });
+}
+async function readKeyFile(f,msg){
+  if(!isPdf(f))return {text:await f.text(),crops:null};
+  const o={nokey:true};
+  const text=await pdfToText(f,(p,n,v)=>{msg.textContent=(v||'Reading')+' answer key… page '+p+' of '+n},false,o);
+  const all=(o.crops||[]).filter(c=>c.url),multi=all.filter(c=>c.lines>=2);
+  return {text,crops:multi.length>=5&&multi.length>=all.length*0.3?all:null};
+}
+const attemptsOf=id=>HIST.filter(x=>x.tid===id);
+const when=d=>new Date(d).toLocaleString(undefined,{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+function arm(btn,label,fn){
+  btn.addEventListener('click',()=>{
+    if(btn.dataset.arm){fn();return}
+    btn.dataset.arm='1';btn.textContent='Tap again';
+    setTimeout(()=>{if(btn.isConnected){delete btn.dataset.arm;btn.textContent=label}},3000);
+  });
+  return btn;
+}
+function home(){
+  S.view='home';S.modal=false;
+  const nameIn=h('input',{type:'text',placeholder:'e.g. NEET Test-03A',id:'tname'});
+  const ta=h('textarea',{rows:8,id:'paste',placeholder:'Paste questions here, or upload a .json / .txt / .pdf file above.'});
+  const file=h('input',{type:'file',id:'file',accept:'.json,.txt,.md,.pdf,text/plain,application/json,application/pdf'});
+  const ansFile=h('input',{type:'file',id:'afile',accept:'.json,.txt,.csv,.pdf,text/plain,application/json,text/csv,application/pdf'});
+  const ansTa=h('textarea',{rows:3,id:'apaste',style:'min-height:80px',placeholder:'Answers like 1-3, 2-1, 3-4   or in order: 3 1 4 2 …'});
+  const msg=h('p',{class:'msg',role:'status'});
+  file.addEventListener('change',async()=>{const f=file.files[0];if(!f)return;if(isPdf(f))return loadPdf(f);
+    try{pend=null;ta.value=await f.text();if(!nameIn.value)nameIn.value=f.name.replace(/\.[^.]+$/,'');msg.className='msg';msg.textContent='Loaded '+f.name+'.'}catch(e){msg.className='msg err';msg.textContent='Could not read that file.'}});
+  let pend=null;
+  const imgCb=h('input',{type:'checkbox',checked:true,id:'imgcb'});
+  const pdfIn=h('input',{type:'file',accept:'.pdf,application/pdf',style:'display:none','aria-label':'Question paper PDF'});
+  const pdfBtn=h('button',{class:'btn primary',style:'width:100%',onclick:()=>pdfIn.click()},'Upload question paper (PDF)');
+  const loadPdf=async f=>{
+    pdfBtn.disabled=true;msg.className='msg';msg.textContent='Reading PDF…';
+    try{
+      const o={};pend=null;
+      ta.value=await pdfToText(f,(p,n,v)=>{msg.textContent=(v||'Reading')+' PDF… page '+p+' of '+n},true,imgCb.checked?o:null);
+      pend=o.crops||null;
+      if(!nameIn.value)nameIn.value=f.name.replace(/\.[^.]+$/,'');
+      const r=parseAny(ta.value),nA=r.questions.filter(q=>q.answer!=null).length;
+      msg.className='msg';
+      msg.textContent=r.questions.length+' questions found'+(nA?', '+nA+' with answers':', no answers found (add an answer key below)')+'. '+(pend?' Original look captured for '+pend.filter(c=>c.url).length+' questions.':'')+' Press Create quiz.';
+    }catch(e){msg.className='msg err';msg.textContent=e.message}
+    pdfBtn.disabled=false;pdfIn.value='';file.value='';
+  };
+  pdfIn.addEventListener('change',()=>{if(pdfIn.files[0])loadPdf(pdfIn.files[0])});
+  let akCrops=null;
+  const akIn=h('input',{type:'file',accept:'.pdf,.json,.txt,.csv,application/pdf,application/json,text/plain,text/csv',style:'display:none','aria-label':'Answer key'});
+  const akBtn=h('button',{class:'btn',style:'width:100%;margin-top:10px',onclick:()=>akIn.click()},'Upload answer key (PDF / TXT / JSON)');
+  const loadKey=async f=>{
+    akBtn.disabled=true;msg.className='msg';msg.textContent='Reading answer key…';
+    try{
+      const kr=await readKeyFile(f,msg);ansTa.value=kr.text;akCrops=kr.crops;
+      let note='Answer key loaded.';
+      if(ta.value.trim()){try{const r=parseAny(ta.value),n=applyAnswers(r.questions,ansTa.value);
+        note=n+' of '+r.questions.length+' answers matched.'}catch(e){}}
+      note+=akCrops?' Solutions found for '+new Set(akCrops.map(c=>c.num)).size+' questions.':(isPdf(f)?' No solutions detected in this PDF (answers only).':'');
+      msg.textContent=note+(ta.value.trim()?' Press Create quiz.':' Now upload the question paper.');
+    }catch(e){msg.className='msg err';msg.textContent=e.message}
+    akBtn.disabled=false;akIn.value='';ansFile.value='';
+  };
+  akIn.addEventListener('change',()=>{if(akIn.files[0])loadKey(akIn.files[0])});
+  ansFile.addEventListener('change',()=>{if(ansFile.files[0])loadKey(ansFile.files[0])});
+  const create=()=>{
+    try{
+      const r=parseAny(ta.value);
+      if(pend){let j=0;for(const q of r.questions){const k=pend.findIndex((c,i)=>i>=j&&c.num===q.id);if(k>=0){j=k+1;if(pend[k].url){q.image=pend[k].url;q.full=true;while(q.options.length<4)q.options.push('')}}}}
+      if(ansTa.value.trim()){
+        const n=applyAnswers(r.questions,ansTa.value);
+        if(!n)throw new Error('Could not match any answers. Use 1-3, 2-1 … or a list in order like 3 1 4 2 …');
+      }
+      if(akCrops)attachSolutions(r.questions,akCrops);
+      const t={id:Date.now().toString(36),name:nameIn.value.trim()||r.name||'Untitled test',created:Date.now(),questions:r.questions};
+      TESTS.unshift(t);saveTests();
+      setup(t.id);
+    }catch(e){msg.className='msg err';msg.textContent=e.message}
+  };
+  const lib=TESTS.length?h('div',{class:'sec'},h('h2',null,'Your tests'),
+    TESTS.map(t=>{
+      const withA=t.questions.filter(q=>q.answer!=null).length;
+      const at=attemptsOf(t.id);
+      let extra='';
+      if(at.length){const best=at.reduce((m,x)=>x.score>m.score?x:m,at[0]);extra=' · '+at.length+' attempt'+(at.length>1?'s':'')+' · best '+best.score+'/'+best.max}
+      return h('div',{class:'item'},
+        h('div',null,h('div',{class:'t'},t.name),h('div',{class:'small muted'},t.questions.length+' questions · '+withA+' with answers'+extra)),
+        h('div',{class:'row'},
+          arm(h('button',{class:'btn sm danger'},'Delete'),'Delete',()=>{TESTS=TESTS.filter(x=>x.id!==t.id);FAV=FAV.filter(f=>f.t!==t.id);saveFav();saveTests();home()}),
+          at.length?h('button',{class:'btn sm',onclick:()=>testStats(t.id)},'Results'):null,
+          h('button',{class:'btn sm primary',onclick:()=>setup(t.id)},'Start')));
+    })):null;
+  const favN=FAV.filter(f=>TESTS.some(t=>t.id===f.t&&t.questions.some(q=>q.id===f.i))).length;
+  const favSec=favN?h('div',{class:'sec'},h('div',{class:'row sp'},h('h2',null,'★ Favorites'),
+    h('button',{class:'btn sm primary',onclick:()=>favView()},'Open ('+favN+')'))):null;
+  const hs=HIST.length?h('div',{class:'sec'},
+    h('div',{class:'row sp'},h('h2',null,'Past attempts'),
+      arm(h('button',{class:'btn sm ghost'},'Clear'),'Clear',()=>{HIST=[];saveHist();home()})),
+    HIST.slice(0,15).map(x=>h('div',{class:'item'},
+      h('div',null,h('div',{class:'t'},x.name),
+        h('div',{class:'small muted'},when(x.date)+' · '+x.c+' right, '+x.w+' wrong, '+x.s+' skipped')),
+      h('div',{class:'row'},h('b',null,x.score+'/'+x.max),h('button',{class:'btn sm',onclick:()=>openAttempt(x)},'View'))))):null;
+  const bk=h('textarea',{rows:5,id:'bk',style:'min-height:90px',placeholder:'Backup text appears here. To restore, paste a backup here and press Restore.'});
+  const bkMsg=h('p',{class:'msg',role:'status'});
+  const backup=h('details',{class:'sec'},h('summary',null,'Backup and restore'),
+    h('p',{class:'small muted'},'Tests and results are saved in this browser on this device. Copy a backup now and then, so you can restore it on another device or if browser data gets cleared.'),
+    bk,
+    h('div',{class:'row',style:'margin-top:8px'},
+      h('button',{class:'btn sm',onclick:()=>{bk.value=JSON.stringify({v:1,tests:TESTS,hist:HIST,fav:FAV});bk.focus();bk.select();bkMsg.className='msg';bkMsg.textContent='Backup ready. Press Copy.'}},'Show backup'),
+      h('button',{class:'btn sm',onclick:async()=>{try{await navigator.clipboard.writeText(bk.value);bkMsg.className='msg';bkMsg.textContent='Copied.'}catch(e){bk.select();bkMsg.textContent='Select all and copy it by hand.'}}},'Copy'),
+      h('button',{class:'btn sm',onclick:()=>{
+        try{
+          const d=JSON.parse(bk.value);if(!d||!Array.isArray(d.tests))throw new Error('x');
+          const ids=new Set(TESTS.map(t=>t.id));
+          d.tests.forEach(t=>{if(t&&t.id&&Array.isArray(t.questions)&&!ids.has(t.id))TESTS.push(t)});
+          const seen=new Set(HIST.map(x=>x.tid+'|'+x.date));
+          (d.hist||[]).forEach(x=>{if(x&&!seen.has(x.tid+'|'+x.date))HIST.push(x)});
+          HIST.sort((a,b)=>b.date-a.date);
+          (d.fav||[]).forEach(f=>{if(f&&f.t&&f.i!=null&&!isFav(f.t,f.i))FAV.push(f)});saveFav();
+          saveTests();saveHist();home();
+        }catch(e){bkMsg.className='msg err';bkMsg.textContent='That is not a valid backup.'}
+      }},'Restore')),bkMsg);
+  mount(h('div',{class:'wrap'},
+    brand('Upload your questions, then practise them like the real paper.'),
+    S.warn?h('div',{class:'banner',role:'alert'},'Browser storage is blocked or full, so your tests and results may not be saved after you close this page.'):null,
+    h('div',{class:'sheet'},
+      h('h2',null,'New test'),
+      pdfBtn,pdfIn,akBtn,akIn,h('label',{class:'subjrow',for:'imgcb',style:'margin-top:6px'},imgCb,h('span',{class:'small'},'Show each question as it looks in the PDF (best for maths, symbols and diagrams)')),h('p',{class:'small muted',style:'margin:0'},'Questions are read from the PDF and turned into MCQs. Works with PDFs that have selectable text.'),
+      h('label',{class:'f',for:'file'},'1. Questions file'),file,
+      h('label',{class:'f',for:'paste'},'or paste questions'),ta,
+      h('label',{class:'f',for:'afile'},'2. Answers file (optional)'),ansFile,
+      h('label',{class:'f',for:'apaste'},'or paste answers'),ansTa,
+      h('label',{class:'f',for:'tname'},'Test name'),nameIn,
+      h('div',{class:'row',style:'margin-top:14px'},
+        h('button',{class:'btn primary',onclick:create},'Create quiz'),
+        h('button',{class:'btn ghost',onclick:()=>{ta.value=SAMPLE;ansTa.value='';nameIn.value='Sample test';msg.className='msg';msg.textContent='Sample loaded. Press Create quiz.'}},'Try a sample')),
+      msg,
+      h('details',null,h('summary',null,'Format guide'),
+        h('p',{class:'small muted'},'Answers can be inside the questions file, or in a separate answers file. A separate file can be:'),
+        h('pre',null,'1-3, 2-1, 3-4      (question number - answer)\n3 1 4 2 …          (answers in question order)\n[3, 1, 4, 2]       (JSON list)\n{"1":3,"2":1}      (JSON map)\n1,3 / 2,1 …        (CSV: number,answer)'),
+        h('p',{class:'small muted'},'Answers are the option number 1–4 (or A–D).'),
+        h('p',{class:'small muted'},'PDF: questions should look like 1. text and options like (1) (2) (3) (4) or (A) (B) (C) (D). An Answer Key at the end of the PDF is picked up automatically.'),
+        h('p',{class:'small muted'},'Explanations (optional): in JSON add "explanation": "..." to each question. In plain text add a line starting with Explanation: after the options. In an answers file use one line per question like 5-3 | reason here, or a JSON list like [{"answer":3,"explanation":"..."}].'),
+        h('p',{class:'small muted'},'Questions as JSON (answer is 1–4, or null if unknown):'),
+        h('pre',null,'{ "questions": [\n  { "subject": "Physics",\n    "question": "Unit of force is",\n    "options": ["N","J","W","Pa"],\n    "answer": 1 }\n] }'),
+        h('p',{class:'small muted'},'Questions as plain text (options (1) to (4) or (A) to (D); an Answer line or an Answer Key at the end is optional):'),
+        h('pre',null,'PHYSICS\n1. Unit of force is\n(1) N\n(2) J\n(3) W\n(4) Pa\nAnswer: 1\n\n2. SI unit of energy is\n(1) N\n(2) J …\n\nAnswer Key\n2-2'))),
+    favSec,lib,hs,backup));
+}
+
+
+/* ---------- favorites ---------- */
+function favView(){
+  S.view='fav';S.modal=false;
+  const items=[];
+  FAV.forEach(f=>{const t=TESTS.find(x=>x.id===f.t);const q=t&&t.questions.find(z=>z.id===f.i);if(q)items.push({f,t,q})});
+  const cards=items.map(({f,t,q})=>h('div',{class:'rv'},
+    h('div',{class:'qmeta',style:'margin-top:0'},h('b',{style:'color:var(--ink)'},'Q'+q.id),h('span',{class:'chip'},q.subject),
+      h('span',{class:'chip',style:'max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap'},t.name),
+      h('button',{class:'btn sm',style:'margin-left:auto;color:#B7791F;font-weight:700',onclick:()=>{toggleFav(f.t,f.i);favView()}},'★ Remove')),
+    qView(q),
+    h('div',{class:q.full?'optgrid':null},q.options.map((o,k)=>{
+      const ok=q.answer===k;
+      return h('div',{class:'opt'+(ok?' ok':''),style:'cursor:default'},h('span',{class:'bub','aria-hidden':'true'},ok?'✓':String(k+1)),h('span',{class:'otext'},ot(q,k)))})),
+    q.answer==null?h('p',{class:'note'},'No answer key for this question.'):
+      h('div',{class:'note',style:'color:var(--ok);font-weight:600'},'Correct answer: ('+(q.answer+1)+')'+(q.full?'':' '+q.options[q.answer])),
+    expBox(q)));
+  const redo=items.map(x=>Object.assign({},x.q));
+  mount(h('div',{class:'wrap'},
+    h('div',{class:'row sp'},h('button',{class:'btn sm ghost',onclick:home},'Back'),h('span',{class:'small muted'},items.length+' saved')),
+    h('h1',{style:'margin:14px 0 8px'},'★ Favorites'),
+    items.length?h('button',{class:'btn primary',style:'margin-bottom:12px',onclick:()=>startQuiz(null,'Favorites',redo,{mode:'practice',minutes:0,pos:4,neg:1})},'Practise these '+items.length):null,
+    items.length?cards:h('p',{class:'muted'},'No favorites yet. Tap ☆ Favorite on any question to save it here.')));
+}
+
+/* ---------- setup ---------- */
+function setup(id){
+  S.view='setup';S.modal=false;
+  const t=TESTS.find(x=>x.id===id);if(!t)return home();
+  const subs=[...new Set(t.questions.map(q=>q.subject))];
+  const withA=t.questions.filter(q=>q.answer!=null).length;
+  let timeTouched=false;
+  const countIn=h('input',{type:'number',min:1,id:'cnt'}),timeIn=h('input',{type:'number',min:0,id:'min'});
+  const checks=subs.map(s=>({s,n:t.questions.filter(q=>q.subject===s).length,cb:h('input',{type:'checkbox',checked:true,id:'sub-'+s})}));
+  const avail=()=>checks.filter(c=>c.cb.checked).reduce((a,c)=>a+c.n,0);
+  const refresh=()=>{
+    const a=avail();countIn.max=a;
+    if(!countIn.value||+countIn.value>a||!countIn.dataset.t)countIn.value=a;
+    if(!timeTouched)timeIn.value=Math.max(1,Math.round((+countIn.value||a)));
+  };
+  checks.forEach(c=>c.cb.addEventListener('change',()=>{countIn.dataset.t='';refresh()}));
+  countIn.addEventListener('input',()=>{countIn.dataset.t='1';if(!timeTouched)timeIn.value=Math.max(1,+countIn.value||1)});
+  timeIn.addEventListener('input',()=>{timeTouched=true});
+  const mode=h('select',{id:'mode'},h('option',{value:'practice'},'Practice – see the answer after each question'),h('option',{value:'exam'},'Exam – see results only at the end'));
+  mode.style.display='none';
+  const MODES=[['practice','Practice','See the correct answer and solution right after you answer each question.'],['exam','Exam','No answers shown while you attempt. You can change answers. Everything is shown after you Submit.']];
+  const modeCards=h('div',{style:'display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 4px',role:'radiogroup','aria-label':'Mode'});
+  const paintModes=()=>MODES.forEach(([v],i)=>{const b=modeCards.children[i],on=mode.value===v;
+    b.style.borderColor=on?'var(--blue)':'var(--line)';b.style.background=on?'var(--blue-soft)':'';b.style.boxShadow=on?'0 0 0 3px var(--blue-soft)':'';b.setAttribute('aria-checked',on?'true':'false');b.firstChild.textContent=(on?'● ':'○ ')+MODES[i][1]});
+  MODES.forEach(([v,n,d])=>modeCards.append(h('button',{type:'button',role:'radio',style:'text-align:left;border:1.5px solid var(--line);border-radius:14px;padding:12px;font:inherit;color:var(--ink);cursor:pointer;background:transparent',onclick:()=>{mode.value=v;paintModes()}},h('b',{style:'display:block;font-size:16px;margin-bottom:4px'},n),h('span',{class:'small muted',style:'display:block;line-height:1.4'},d))));
+  paintModes();
+  const shuf=h('input',{type:'checkbox',id:'shuf'});
+  const pos=h('input',{type:'number',id:'pos',value:4,min:0,step:'any'});
+  const neg=h('input',{type:'number',id:'neg',value:1,min:0,step:'any'});
+  const keyFile=h('input',{type:'file',id:'kfile',accept:'.json,.txt,.csv,.pdf,text/plain,application/json,text/csv,application/pdf'});
+  const keyTa=h('textarea',{rows:4,id:'key',placeholder:'1-3, 2-1, 3-4   or in order: 3 1 4 2 …'});
+  const keyMsg=h('p',{class:'msg',role:'status'});
+  let kCrops=null;
+  keyFile.addEventListener('change',async()=>{const f=keyFile.files[0];if(!f)return;
+    try{keyMsg.className='msg';keyMsg.textContent='Reading…';const r=await readKeyFile(f,keyMsg);keyTa.value=r.text;kCrops=r.crops;
+      keyMsg.textContent='Loaded '+f.name+'.'+(r.crops?' Solutions found for '+r.crops.length+' questions.':'')}
+    catch(e){keyMsg.className='msg err';keyMsg.textContent=e.message||'Could not read that file.'}});
+  const start=h('button',{class:'btn primary',onclick:()=>{
+    const chosen=new Set(checks.filter(c=>c.cb.checked).map(c=>c.s));
+    if(!chosen.size)return;
+    let pool=t.questions.filter(q=>chosen.has(q.subject));
+    if(shuf.checked)shuffle(pool);
+    pool=pool.slice(0,Math.max(1,Math.min(pool.length,+countIn.value||pool.length)));
+    startQuiz(t.id,t.name,pool,{mode:mode.value,minutes:Math.max(0,+timeIn.value||0),pos:+pos.value||0,neg:+neg.value||0});
+  }},'Start quiz');
+  refresh();
+  const nAt=attemptsOf(id).length;
+  mount(h('div',{class:'wrap'},
+    h('div',{class:'row sp'},h('button',{class:'btn sm ghost',onclick:home},'Back'),
+      nAt?h('button',{class:'btn sm',onclick:()=>testStats(id)},'Results ('+nAt+')'):h('span',{class:'small muted'},t.questions.length+' questions')),
+    h('h1',{style:'margin:14px 0 4px;overflow-wrap:anywhere'},t.name),
+    withA<t.questions.length?h('p',{class:'small',style:'color:var(--warn)'},
+      withA===0?'No answers in this test yet. Add an answer key below to see right and wrong.':
+      (t.questions.length-withA)+' questions have no answer. Add them in the answer key below.'):null,
+    h('div',{class:'sheet'},
+      h('h3',null,'Subjects'),
+      checks.map(c=>h('label',{class:'subjrow',for:'sub-'+c.s},c.cb,h('span',null,c.s),h('span',{class:'n'},c.n+' questions'))),
+      h('div',{class:'cols'},
+        h('div',null,h('label',{class:'f',for:'cnt'},'Number of questions'),countIn),
+        h('div',null,h('label',{class:'f',for:'min'},'Time (minutes, 0 = no limit)'),timeIn)),
+      h('label',{class:'f'},'Mode'),modeCards,mode,
+      h('div',{class:'cols'},
+        h('div',null,h('label',{class:'f',for:'pos'},'Marks for right'),pos),
+        h('div',null,h('label',{class:'f',for:'neg'},'Marks lost for wrong'),neg)),
+      h('label',{class:'subjrow',for:'shuf',style:'margin-top:8px'},shuf,h('span',null,'Shuffle question order')),
+      h('div',{style:'margin-top:12px'},start)),
+    h('details',{open:withA===0},h('summary',null,'Answer key ('+withA+'/'+t.questions.length+' set)'),
+      h('p',{class:'small muted'},'Upload an answers file or paste answers: question number and answer like 1-3, 2-1, 3-4, or just the answers in order like 3 1 4 2. Answers are 1–4 or A–D. Listed numbers replace the old answers.'),
+      keyFile,keyTa,
+      h('div',{class:'row',style:'margin-top:8px'},h('button',{class:'btn sm',onclick:()=>{
+        try{
+          const n=applyAnswers(t.questions,keyTa.value);
+          if(kCrops)attachSolutions(t.questions,kCrops);
+          if(!n&&!kCrops){keyMsg.className='msg err';keyMsg.textContent='No valid answers found. Use 1-3, 2-1 … or a list in order like 3 1 4 2 …';return}
+          saveTests();setup(id);
+        }catch(e){keyMsg.className='msg err';keyMsg.textContent=e.message}
+      }},'Save answers')),keyMsg)));
+}
+
+/* ---------- quiz ---------- */
+function startQuiz(testId,name,pool,o){
+  const now=Date.now();
+  S.quiz={testId,name,qs:pool,resp:new Array(pool.length).fill(null),marked:new Set(),seen:new Set([0]),
+    mode:o.mode,pos:o.pos,neg:o.neg,cur:0,start:now,end:o.minutes?now+o.minutes*60000:null,done:false,opts:o,qt:new Array(pool.length).fill(0),qstart:now,paused:false,pauseAt:0,target:o.minutes?o.minutes*60/pool.length:0};
+  S.view='quiz';S.modal=false;
+  clearInterval(S.timer);S.timer=setInterval(tick,1000);
+  quiz();
+}
+function tick(){
+  const Q=S.quiz;if(!Q||Q.done||S.view!=='quiz'){clearInterval(S.timer);return}
+  if(Q.paused)return;
+  const el=document.getElementById('tm');
+  if(Q.end){
+    const left=Math.ceil((Q.end-Date.now())/1000);
+    if(left<=0){submit();return}
+    if(el){el.textContent=fmt(left);el.classList.toggle('low',left<300)}
+  }else if(el)el.textContent=fmt((Date.now()-Q.start)/1000);
+  const qe=document.getElementById('qtm');
+  if(qe){const c=curSec();qe.textContent=fmt(c);qe.classList.toggle('low',!!Q.target&&c>Q.target)}
+}
+function go(n){const Q=S.quiz;if(Q.paused)return;qFlush();Q.cur=n;Q.seen.add(n);S.modal=false;quiz();window.scrollTo(0,0)}
+function pick(k){
+  const Q=S.quiz,i=Q.cur;
+  if(Q.mode==='practice'&&Q.resp[i]!=null)return;
+  Q.resp[i]=k;quiz();
+}
+function quiz(){
+  const Q=S.quiz,i=Q.cur,q=Q.qs[i],n=Q.qs.length;
+  const picked=Q.resp[i];
+  const locked=Q.mode==='practice'&&picked!=null;
+  const opts=q.options.map((o,k)=>{
+    let cls='opt';const sel=picked===k;
+    if(sel)cls+=' sel';
+    let mark=String(k+1);
+    if(locked&&q.answer!=null){
+      if(k===q.answer){cls+=' ok';mark='✓'}
+      else if(sel){cls+=' bad';mark='✕'}
+    }
+    return h('button',{class:cls,role:'radio','aria-checked':sel?'true':'false',disabled:locked,onclick:()=>pick(k)},
+      h('span',{class:'bub','aria-hidden':'true'},mark),h('span',{class:'otext'},q.full?'Option '+(k+1):o));
+  });
+  let fb=null;
+  if(locked){
+    if(q.answer==null)fb=h('p',{class:'note'},'No answer key for this question.');
+    else if(picked===q.answer)fb=h('p',{class:'note',style:'color:var(--ok);font-weight:600'},'Correct. Answer: option '+(q.answer+1));
+    else fb=h('p',{class:'note',style:'color:var(--bad);font-weight:600'},'Wrong. Correct answer: option '+(q.answer+1));
+  }
+  const grid=h('div',{class:'modal',onclick:e=>{if(e.target===e.currentTarget){S.modal=false;quiz()}}},
+    h('div',{class:'box',role:'dialog','aria-label':'Question grid'},
+      h('div',{class:'row sp'},h('h2',null,'Questions'),h('button',{class:'btn sm ghost',onclick:()=>{S.modal=false;quiz()}},'Close')),
+      h('div',{class:'legend',style:'margin-top:8px'},h('span',{class:'a'},'Answered'),h('span',{class:'m'},'Marked for review'),h('span',null,'Not answered')),
+      h('div',{class:'pgrid'},Q.qs.map((x,j)=>h('button',{
+        class:'pb'+(Q.resp[j]!=null?' ans':(Q.seen.has(j)?' seen':''))+(Q.marked.has(j)?' mk':'')+(j===i?' cur':''),
+        'aria-label':'Question '+(j+1),onclick:()=>go(j)},String(j+1)))),
+      h('p',{class:'small muted'},Q.resp.filter(x=>x!=null).length+' answered, '+Q.resp.filter(x=>x==null).length+' left, '+Q.marked.size+' marked.'),
+      h('button',{class:'btn primary',style:'width:100%',onclick:submit},'Submit test')));
+  const last=i===n-1;
+  mount0(h('div',null,
+    h('div',{class:'top'},
+      h('div',{class:'in'},
+        h('span',{class:'small muted'},'Q '+(i+1)+' of '+n),
+        h('span',{class:'tm',id:'tm','aria-label':'Timer'},Q.end?fmt((Q.end-Date.now())/1000):fmt((Date.now()-Q.start)/1000)),
+        h('button',{class:'btn sm',onclick:()=>{S.modal=true;quiz()}},'Grid')),
+      h('div',{class:'in tq'},
+        h('span',{class:'small muted'},'This question'),
+        h('span',{class:'tm q',id:'qtm','aria-label':'Time on this question'},fmt(curSec())),
+        Q.target?h('span',{class:'small muted'},'goal '+fmt(Q.target)):null,
+        h('button',{class:'btn sm',onclick:togglePause},'Pause')),
+      h('div',{class:'prog'},h('b',{style:'width:'+((i+1)/n*100)+'%'}))),
+    h('div',{class:'wrap q'},
+      h('div',{class:'qmeta'},h('span',{class:'chip'},q.subject),
+        q.fig?h('span',{class:'chip fig'},'Has a diagram: check the paper'):null,
+        Q.marked.has(i)?h('span',{class:'chip mk'},'Marked'):null,
+        Q.testId?favBtn(Q.testId,q.id,quiz):null),
+      qView(q),
+      h('div',{role:'radiogroup','aria-label':'Options',class:q.full?'optgrid':null},opts),
+      fb,
+      locked?expBox(q):null,
+      Q.mode==='exam'&&picked!=null?h('button',{class:'btn sm ghost',onclick:()=>{Q.resp[i]=null;quiz()}},'Clear answer'):null),
+    h('div',{class:'bar-b'},h('div',{class:'in'},
+      h('button',{class:'btn',disabled:i===0,onclick:()=>go(i-1)},'Previous'),
+      h('button',{class:'btn',onclick:()=>{Q.marked.has(i)?Q.marked.delete(i):Q.marked.add(i);quiz()}},Q.marked.has(i)?'Unmark':'Mark'),
+      last?h('button',{class:'btn primary',onclick:()=>{S.modal=true;quiz()}},'Finish'):h('button',{class:'btn primary',onclick:()=>go(i+1)},'Next'))),
+    S.modal?grid:null,
+    Q.paused?h('div',{class:'modal',style:'align-items:center;background:var(--paper)'},
+      h('div',{class:'box',style:'border-radius:16px;max-width:420px;text-align:center'},
+        h('h2',null,'Paused'),h('p',{class:'muted'},'Timer is stopped and the question is hidden.'),
+        h('button',{class:'btn primary',style:'width:100%',onclick:togglePause},'Resume'))):null));
+}
+function mount0(node){app.replaceChildren(node)}   // re-render without jumping to top
+
+document.addEventListener('keydown',e=>{
+  if(S.view!=='quiz'||S.modal||!S.quiz||S.quiz.paused||e.target.matches('input,textarea,select'))return;
+  const Q=S.quiz;
+  if(/^[1-9]$/.test(e.key)){const k=+e.key-1;if(k<Q.qs[Q.cur].options.length)pick(k)}
+  else if(e.key==='ArrowRight'&&Q.cur<Q.qs.length-1)go(Q.cur+1);
+  else if(e.key==='ArrowLeft'&&Q.cur>0)go(Q.cur-1);
+  else if(e.key==='m'||e.key==='M'){Q.marked.has(Q.cur)?Q.marked.delete(Q.cur):Q.marked.add(Q.cur);quiz()}
+});
+
+/* ---------- result ---------- */
+function grade(name,tid,qs,resp,marked,pos,neg,time,opts,times){
+  const subj={};let c=0,w=0,s=0,u=0;
+  const items=qs.map((q,i)=>{
+    const r=resp[i];let st;
+    const b=subj[q.subject]||(subj[q.subject]={c:0,w:0,s:0,u:0,n:0});b.n++;
+    if(r==null){st='skipped';s++;b.s++}
+    else if(q.answer==null){st='ungraded';u++;b.u++}
+    else if(r===q.answer){st='correct';c++;b.c++}
+    else{st='wrong';w++;b.w++}
+    return {q,r,st,marked:marked.has(i),t:times?times[i]:null};
+  });
+  const graded=qs.filter(q=>q.answer!=null).length;
+  const score=Math.round((c*pos-w*neg)*100)/100;
+  const max=Math.round(graded*pos*100)/100;
+  return {name,tid,items,subj,c,w,s,u,score,max,time,acc:c+w?Math.round(c/(c+w)*100):0,opts};
+}
+function qFlush(){const Q=S.quiz;if(Q.paused)return;const n=Date.now();Q.qt[Q.cur]+=(n-Q.qstart)/1000;Q.qstart=n}
+function curSec(){const Q=S.quiz;return Q.qt[Q.cur]+(Q.paused?0:(Date.now()-Q.qstart)/1000)}
+function togglePause(){
+  const Q=S.quiz;if(!Q||Q.done)return;
+  if(!Q.paused){qFlush();Q.paused=true;Q.pauseAt=Date.now()}
+  else{const d=Date.now()-Q.pauseAt;Q.start+=d;if(Q.end)Q.end+=d;Q.qstart=Date.now();Q.paused=false}
+  quiz();
+}
+function timeBlock(R){
+  const it=R.items.filter(x=>x.t!=null);if(!it.length)return null;
+  const avg=a=>a.length?fmt(a.reduce((s,x)=>s+x.t,0)/a.length):'–';
+  const slow=[...it].sort((a,b)=>b.t-a.t).slice(0,3);
+  return h('div',{class:'small muted',style:'margin:-4px 0 8px;line-height:1.6'},
+    'Avg per question '+avg(it)+' · on correct '+avg(it.filter(x=>x.st==='correct'))+' · on wrong '+avg(it.filter(x=>x.st==='wrong')),
+    h('br'),'Slowest: '+slow.map(x=>'Q'+x.q.id+' ('+fmt(x.t)+')').join(', '));
+}
+function submit(){
+  const Q=S.quiz;if(!Q||Q.done)return;
+  if(Q.paused){const d=Date.now()-Q.pauseAt;Q.start+=d;if(Q.end)Q.end+=d;Q.paused=false}else qFlush();
+  Q.done=true;clearInterval(S.timer);
+  const time=Math.min((Date.now()-Q.start)/1000,Q.end?(Q.end-Q.start)/1000:1e9);
+  const R=grade(Q.name,Q.testId,Q.qs,Q.resp,Q.marked,Q.pos,Q.neg,time,Q.opts,Q.qt);
+  S.result=R;
+  HIST.unshift({tid:Q.testId,name:Q.name,date:Date.now(),score:R.score,max:R.max,c:R.c,w:R.w,s:R.s,u:R.u,
+    time:Math.round(time),mode:Q.mode,p:Q.pos,n:Q.neg,
+    d:Q.qs.map((q,i)=>[q.id,Q.resp[i],q.answer,Q.marked.has(i)?1:0,Math.round(Q.qt[i])])});
+  HIST=HIST.slice(0,200);saveHist();
+  S.view='result';S.filter='all';S.modal=false;
+  result();
+}
+function openAttempt(e){
+  const t=TESTS.find(x=>x.id===e.tid);
+  const opts={mode:'practice',minutes:0,pos:e.p||4,neg:e.n||1};
+  let R;
+  if(t&&Array.isArray(e.d)){
+    const qs=[],resp=[],mk=new Set(),times=[];
+    e.d.forEach(([id,r,a,m,tt])=>{
+      const b=t.questions.find(q=>q.id===id);
+      if(b){if(m)mk.add(qs.length);qs.push(Object.assign({},b,{answer:a}));resp.push(r);times.push(tt==null?null:tt)}
+    });
+    R=grade(e.name,e.tid,qs,resp,mk,opts.pos,opts.neg,e.time,opts,times);
+  }else{
+    R={name:e.name,tid:e.tid,items:[],subj:{},c:e.c,w:e.w,s:e.s,u:e.u||0,score:e.score,max:e.max,time:e.time,
+      acc:e.c+e.w?Math.round(e.c/(e.c+e.w)*100):0,opts,nodetail:true};
+  }
+  R.date=e.date;
+  R.back=attemptsOf(e.tid).length&&e.tid?()=>testStats(e.tid):null;
+  S.result=R;S.view='result';S.filter='all';result();
+}
+function result(){
+  const R=S.result;
+  const tabs=[['all','All'],['wrong','Wrong'],['skipped','Skipped'],['marked','Marked']];
+  const shown=R.items.filter(x=>S.filter==='all'||(S.filter==='marked'?x.marked:x.st===S.filter));
+  const review=shown.map(x=>{
+    const q=x.q;
+    const ca=q.answer!=null?' · Answer: ('+(q.answer+1)+')':'';
+    const chip=x.st==='correct'?h('span',{class:'chip ok'},'Correct'+ca):x.st==='wrong'?h('span',{class:'chip bad'},'Wrong'+ca):
+      x.st==='ungraded'?h('span',{class:'chip'},'Attempted, no key'):h('span',{class:'chip'},'Skipped'+ca);
+    return h('div',{class:'rv'},
+      h('div',{class:'qmeta',style:'margin-top:0'},h('b',{style:'color:var(--ink)'},'Q'+q.id),h('span',{class:'chip'},q.subject),chip,
+        x.t!=null?h('span',{class:'chip'},'Time '+fmt(x.t)):null,x.marked?h('span',{class:'chip mk'},'Marked'):null,q.fig?h('span',{class:'chip fig'},'Diagram'):null,
+        R.tid?favBtn(R.tid,q.id,result2):null),
+      qView(q),
+      h('div',{class:q.full?'optgrid':null},q.options.map((o,k)=>{
+        let cls='opt';let mark=String(k+1);
+        if(q.answer===k){cls+=' ok';mark='✓'}
+        else if(x.r===k&&q.answer!=null){cls+=' bad';mark='✕'}
+        else if(x.r===k)cls+=' sel';
+        return h('div',{class:cls,style:'cursor:default'},h('span',{class:'bub','aria-hidden':'true'},mark),h('span',{class:'otext'},ot(q,k)));
+      })),
+      q.answer==null?h('p',{class:'note'},'No answer key for this question.'):
+        h('div',{class:'note',style:'line-height:1.6'},
+          h('div',{style:'color:var(--ok);font-weight:600'},'Correct answer: ('+(q.answer+1)+')'+(q.full?'':' '+q.options[q.answer])),
+          x.r==null?h('div',null,'Your answer: not attempted'):
+          x.st==='wrong'?h('div',{style:'color:var(--bad)'},'Your answer: ('+(x.r+1)+')'+(q.full?'':' '+q.options[x.r])):
+          h('div',null,'Your answer: ('+(x.r+1)+')'+(q.full?'':' '+q.options[x.r]))),
+      expBox(q));
+  });
+  const redo=R.items.filter(x=>x.st==='wrong'||x.st==='skipped').map(x=>x.q);
+  mount(h('div',{class:'wrap'},
+    h('p',{class:'muted',style:'margin-bottom:0;overflow-wrap:anywhere'},R.name+(R.date?' · '+when(R.date):'')),
+    h('div',{class:'score'},String(R.score),h('small',null,' / '+R.max)),
+    h('p',{class:'muted'},'Time used '+fmt(R.time)+(R.c+R.w?' · Accuracy '+R.acc+'%':'')),
+    timeBlock(R),
+    R.u?h('p',{class:'small',style:'color:var(--warn)'},R.u+' attempted question(s) have no answer key, so they are not scored.'):null,
+    h('div',{class:'stats'},
+      h('div',null,h('b',{style:'color:var(--ok)'},R.c),h('span',null,'Correct')),
+      h('div',null,h('b',{style:'color:var(--bad)'},R.w),h('span',null,'Wrong')),
+      h('div',null,h('b',null,R.s),h('span',null,'Skipped')),
+      h('div',null,h('b',null,R.c+R.w+R.s+R.u),h('span',null,'Total'))),
+    R.nodetail?h('p',{class:'small muted'},'Question-level details are not available for this attempt (the test was deleted or it was saved by an older version).'):h('div',null,
+      h('h2',null,'By subject'),
+      Object.keys(R.subj).map(k=>{const b=R.subj[k];
+        return h('div',{class:'subjrow'},h('span',{style:'min-width:92px;font-weight:600'},k),
+          h('div',{class:'bar'},h('i',{class:'c',style:'width:'+(b.c/b.n*100)+'%'}),h('i',{class:'w',style:'width:'+(b.w/b.n*100)+'%'})),
+          h('span',{class:'n',style:'margin-left:0;min-width:84px;text-align:right'},b.c+'/'+b.n+' right'))})),
+    h('div',{class:'row',style:'margin:18px 0 0'},
+      redo.length?h('button',{class:'btn primary',onclick:()=>startQuiz(R.tid,R.name.replace(/ \(retry\)$/,'')+' (retry)',redo.map(q=>Object.assign({},q)),Object.assign({},R.opts,{mode:'practice'}))},'Retry '+redo.length+' wrong & skipped'):null,
+      R.back?h('button',{class:'btn',onclick:R.back},'All results'):null,
+      h('button',{class:'btn',onclick:home},'Home')),
+    R.nodetail?null:h('div',{class:'sec'},h('h2',null,'Review'),
+      h('div',{class:'tabs',role:'tablist'},tabs.map(([k,l])=>h('button',{class:'tab'+(S.filter===k?' on':''),role:'tab','aria-selected':S.filter===k?'true':'false',onclick:()=>{S.filter=k;result2()}},l))),
+      h('div',{id:'rvbox'},review.length?review:h('p',{class:'muted'},'Nothing here.')))));
+}
+function testStats(id){
+  S.view='stats';S.modal=false;
+  const t=TESTS.find(x=>x.id===id),at=attemptsOf(id);
+  if(!at.length)return t?setup(id):home();
+  const name=t?t.name:at[0].name;
+  const pct=x=>x.max?Math.max(0,Math.round(x.score/x.max*100)):0;
+  const bestE=at.reduce((m,x)=>x.score>m.score?x:m,at[0]);
+  const avg=Math.round(at.reduce((a,x)=>a+pct(x),0)/at.length);
+  const tot=at.reduce((a,x)=>({c:a.c+x.c,w:a.w+x.w,s:a.s+x.s}),{c:0,w:0,s:0});
+  const qstat={},sub={};
+  if(t)at.forEach(e=>(e.d||[]).forEach(([qid,r,a])=>{
+    const b=t.questions.find(q=>q.id===qid);if(!b)return;
+    const ss=sub[b.subject]||(sub[b.subject]={c:0,w:0,s:0});
+    if(r==null){ss.s++;return}
+    if(a==null)return;
+    const qs=qstat[qid]||(qstat[qid]={w:0,n:0,b});qs.n++;
+    if(r===a)ss.c++;else{ss.w++;qs.w++}
+  }));
+  const weak=Object.values(qstat).filter(x=>x.w>0).sort((a,b)=>b.w-a.w||(b.w/b.n-a.w/a.n)).slice(0,10);
+  const trend=at.slice(0,12).reverse();
+  mount(h('div',{class:'wrap'},
+    h('div',{class:'row sp'},h('button',{class:'btn sm ghost',onclick:home},'Back'),
+      t?h('button',{class:'btn sm primary',onclick:()=>setup(id)},'Start again'):null),
+    h('h1',{style:'margin:14px 0 4px;overflow-wrap:anywhere'},name),
+    h('p',{class:'muted'},at.length+' attempt'+(at.length>1?'s':'')+' saved'),
+    h('div',{class:'stats'},
+      h('div',null,h('b',null,bestE.score+'/'+bestE.max),h('span',null,'Best')),
+      h('div',null,h('b',null,avg+'%'),h('span',null,'Average')),
+      h('div',null,h('b',{style:'color:var(--ok)'},tot.c),h('span',null,'Right (all)')),
+      h('div',null,h('b',{style:'color:var(--bad)'},tot.w),h('span',null,'Wrong (all)'))),
+    h('h2',null,'Score trend'),
+    h('p',{class:'small muted',style:'margin:2px 0 0'},'Percent of full marks, oldest to newest'),
+    h('div',{class:'trend','aria-hidden':'true'},trend.map(x=>h('div',{class:'col'},h('div',{class:'b',style:'height:'+Math.max(4,pct(x)*0.8)+'px'}),pct(x)+'%'))),
+    Object.keys(sub).length?h('div',{class:'sec'},h('h2',null,'Subjects, all attempts'),
+      Object.keys(sub).map(k=>{const b=sub[k],n=b.c+b.w+b.s;
+        return h('div',{class:'subjrow'},h('span',{style:'min-width:92px;font-weight:600'},k),
+          h('div',{class:'bar'},h('i',{class:'c',style:'width:'+(b.c/n*100)+'%'}),h('i',{class:'w',style:'width:'+(b.w/n*100)+'%'})),
+          h('span',{class:'n',style:'margin-left:0;min-width:96px;text-align:right'},b.c+' right, '+b.w+' wrong'))})):null,
+    weak.length?h('div',{class:'sec'},h('h2',null,'Questions you get wrong most'),
+      weak.map(x=>h('div',{class:'item'},
+        h('div',{style:'min-width:0'},h('div',{class:'t'},'Q'+x.b.id+' · '+x.b.subject),
+          h('div',{class:'small muted',style:'overflow-wrap:anywhere'},x.b.text.replace(/\s+/g,' ').slice(0,110)+(x.b.text.length>110?'…':''))),
+        h('span',{class:'chip bad'},x.w+' of '+x.n+' wrong')))):null,
+    h('div',{class:'sec'},h('h2',null,'All attempts'),
+      at.map(x=>h('div',{class:'item'},
+        h('div',null,h('div',{class:'t'},when(x.date)+(x.mode?' · '+(x.mode==='exam'?'Exam':'Practice'):'')),
+          h('div',{class:'small muted'},x.c+' right · '+x.w+' wrong · '+x.s+' skipped · '+fmt(x.time))),
+        h('div',{class:'row'},h('b',null,x.score+'/'+x.max),h('button',{class:'btn sm',onclick:()=>openAttempt(x)},'View')))))));
+}
+function result2(){const y=window.scrollY;result();window.scrollTo(0,y)}
+
+home();
+</script>
+</body>
+</html>
